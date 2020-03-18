@@ -31,7 +31,12 @@ const todoListsReducer = (todoLists, {type, title, listIdx, todoIdx, done}) => {
       return todoListsCopy
 
     case 'DELETE_TODO':
-      todoListsCopy[listIdx].todos.splice(todoIdx, 1)
+      if (
+        todoListsCopy[listIdx].todos[todoIdx].done ||
+        window.confirm('Are you sure?')
+      ) {
+        todoListsCopy[listIdx].todos.splice(todoIdx, 1)
+      }
       return todoListsCopy
 
     default:

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input, Card} from './components'
+import {TextForm, TodoLists, TodoList} from './containers'
 import {useTodoLists} from './hooks'
 
 const initialTodos = [
@@ -27,71 +27,23 @@ const App = () => {
 
   return (
     <div>
-      <header>
-        <h1>React Todo</h1>
+      <header className="site__header">
+        <h1 className="site__title">React Todo</h1>
+        <p>You have {totalTodos} tasks</p>
       </header>
 
-      <main>
-        <Input onSubmit={addTodoList} placeholder="Add a list..." />
+      <main className="site__main">
+        <TextForm onSubmit={addTodoList} placeholder="Add a list..." />
 
-        <p>You have {totalTodos} tasks</p>
-
-        <ol className="todo-list">
-          {todoLists.map(({title, todos}, listIdx) => (
-            <li key={`todo-list__${listIdx}`}>
-              <Card>
-                <h2>{title}</h2>
-
-                <button
-                  className="button"
-                  onClick={() => clearCompleted(listIdx)} // FIXME
-                  type="button"
-                >
-                  clear completed
-                </button>
-                <button
-                  className="button"
-                  onClick={() => deleteTodoList(listIdx)} // FIXME
-                  type="button"
-                >
-                  delete list
-                </button>
-                <Input
-                  onSubmit={value => addTodo(listIdx, value)} // FIXME
-                  placeholder="Add a task..."
-                />
-                <ol className="todos">
-                  {todos.map(({title, done}, todoIdx) => (
-                    <li key={`todo__${todoIdx}`} className="todo">
-                      <header>
-                        <button
-                          className="todo__complete"
-                          onClick={() => completeTodo(listIdx, todoIdx, !done)} // FIXME
-                          type="button"
-                        >
-                          {done ? '🔳' : '⬜️'}
-                        </button>
-
-                        {/* FIXME: make button label */}
-                        <h3 className="todo__title" data-done={done}>
-                          {title}
-                        </h3>
-                      </header>
-
-                      <button
-                        className="button"
-                        onClick={() => deleteTodo(listIdx, todoIdx)} // FIXME
-                        type="button"
-                      >
-                        delete
-                      </button>
-                    </li>
-                  ))}
-                </ol>
-              </Card>
-            </li>
-          ))}
-        </ol>
+        <TodoLists
+          data={todoLists}
+          renderList={TodoList}
+          onListDelete={deleteTodoList}
+          onTodoAdd={addTodo}
+          onTodoDelete={deleteTodo}
+          onTodoComplete={completeTodo}
+          onClearCompleted={clearCompleted}
+        />
       </main>
     </div>
   )
