@@ -1,28 +1,14 @@
-import React, {useState, useCallback} from 'react'
+import React from 'react'
+import {useInput} from '../../hooks'
 
 const Input = ({onSubmit, placeholder}) => {
-  const [titleInput, setTitleInput] = useState('')
-
-  const handleChange = useCallback(e => setTitleInput(e.target.value), [])
-
-  const handleSubmit = useCallback(
-    e => {
-      onSubmit(titleInput)
-      setTitleInput('')
-      e.preventDefault()
-    },
-    [onSubmit, titleInput],
-  )
+  const {input, handleChange, handleSubmit} = useInput('', onSubmit)
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        value={titleInput}
-        onChange={handleChange}
-        placeholder={placeholder}
-      />
+      <input value={input} onChange={handleChange} placeholder={placeholder} />
     </form>
   )
 }
 
-export default Input
+export {Input}

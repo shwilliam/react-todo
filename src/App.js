@@ -2,10 +2,28 @@ import React from 'react'
 import {Input, Card} from './components'
 import {useTodoLists} from './hooks'
 
+const initialTodos = [
+  {
+    title: 'Welcome 👋',
+    todos: [
+      {title: 'Add a new todo list', done: false},
+      {title: 'Add a task', done: false},
+      {title: 'Mark task as done', done: false},
+    ],
+  },
+]
+
 const App = () => {
-  const {todoLists, totalTodos, addTodoList, addTodo} = useTodoLists([
-    {title: 'Hello world', todos: []},
-  ])
+  const {
+    todoLists,
+    totalTodos,
+    addTodoList,
+    deleteTodoList,
+    addTodo,
+    deleteTodo,
+    completeTodo,
+    clearCompleted,
+  } = useTodoLists(initialTodos)
 
   return (
     <div>
@@ -14,22 +32,60 @@ const App = () => {
       </header>
 
       <main>
-        <Input onSubmit={addTodoList} placeholder="New todo list" />
+        <Input onSubmit={addTodoList} placeholder="Add a list..." />
 
         <p>You have {totalTodos} tasks</p>
 
-        <ol>
-          {todoLists.map(({title, todos}, i) => (
-            <li key={`todo-list__${i}`}>
+        <ol className="todo-list">
+          {todoLists.map(({title, todos}, listIdx) => (
+            <li key={`todo-list__${listIdx}`}>
               <Card>
                 <h2>{title}</h2>
+
+                <button
+                  className="button"
+                  onClick={() => clearCompleted(listIdx)} // FIXME
+                  type="button"
+                >
+                  clear completed
+                </button>
+                <button
+                  className="button"
+                  onClick={() => deleteTodoList(listIdx)} // FIXME
+                  type="button"
+                >
+                  delete list
+                </button>
                 <Input
-                  onSubmit={value => addTodo(i, value)} // FIXME
-                  placeholder="New todo"
+                  onSubmit={value => addTodo(listIdx, value)} // FIXME
+                  placeholder="Add a task..."
                 />
-                <ol>
-                  {todos.map(({title}, i) => (
-                    <li key={`todo__${i}`}>{title}</li>
+                <ol className="todos">
+                  {todos.map(({title, done}, todoIdx) => (
+                    <li key={`todo__${todoIdx}`} className="todo">
+                      <header>
+                        <button
+                          className="todo__complete"
+                          onClick={() => completeTodo(listIdx, todoIdx, !done)} // FIXME
+                          type="button"
+                        >
+                          {done ? '🔳' : '⬜️'}
+                        </button>
+
+                        {/* FIXME: make button label */}
+                        <h3 className="todo__title" data-done={done}>
+                          {title}
+                        </h3>
+                      </header>
+
+                      <button
+                        className="button"
+                        onClick={() => deleteTodo(listIdx, todoIdx)} // FIXME
+                        type="button"
+                      >
+                        delete
+                      </button>
+                    </li>
                   ))}
                 </ol>
               </Card>

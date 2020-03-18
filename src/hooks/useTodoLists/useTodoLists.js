@@ -6,7 +6,11 @@ const useTodoLists = (initialTodoLists = []) => {
 
   const totalTodos = useMemo(
     () =>
-      todoLists.reduce((total, todoList) => total + todoList.todos.length, 0),
+      todoLists.reduce(
+        (total, todoList) =>
+          total + todoList.todos.filter(({done}) => !done).length,
+        0,
+      ),
     [todoLists],
   )
 
@@ -14,12 +18,44 @@ const useTodoLists = (initialTodoLists = []) => {
     title => dispatch({type: 'NEW_LIST', title}),
     [],
   )
-  const addTodo = useCallback(
-    (idx, title) => dispatch({type: 'NEW_TODO', idx, title}),
+
+  const deleteTodoList = useCallback(
+    list => dispatch({type: 'DELETE_LIST', listIdx: list}),
     [],
   )
 
-  return {todoLists, totalTodos, addTodoList, addTodo}
+  const addTodo = useCallback(
+    (list, title) => dispatch({type: 'NEW_TODO', listIdx: list, title}),
+    [],
+  )
+
+  const deleteTodo = useCallback(
+    (list, todo) =>
+      dispatch({type: 'DELETE_TODO', listIdx: list, todoIdx: todo}),
+    [],
+  )
+
+  const completeTodo = useCallback(
+    (list, todo, done = true) =>
+      dispatch({type: 'COMPLETE_TODO', listIdx: list, todoIdx: todo, done}),
+    [],
+  )
+
+  const clearCompleted = useCallback(
+    list => dispatch({type: 'CLEAR_COMPLETE', listIdx: list}),
+    [],
+  )
+
+  return {
+    todoLists,
+    totalTodos,
+    addTodoList,
+    deleteTodoList,
+    addTodo,
+    deleteTodo,
+    completeTodo,
+    clearCompleted,
+  }
 }
 
 export {useTodoLists}
