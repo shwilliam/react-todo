@@ -56,10 +56,10 @@ ol {
 }
 
 .card {
+  overflow: hidden;
   background-color: papayawhip;
   border: 1px solid #222;
   border-radius: 5px;
-  padding: 20px;
   margin-right: 20px;
 }
 
@@ -81,9 +81,12 @@ ol {
 }
 
 .todo-list__title {
-  padding-bottom: 10px;
-  margin-bottom: 12.5px;
+  padding: 20px;
+}
+
+.todo-list__header {
   border-bottom: 1px solid #222;
+  padding-bottom: 12.5px;
 }
 
 .todo-list {
@@ -92,21 +95,39 @@ ol {
   padding: 20px 0;
 }
 
-.todo-list__actions {
-  display: flex;
-  justify-content: space-between;
-  margin: 5px 0;
+.todo-list__content {
+  padding: 10px 0;
 }
 
-.todo__container {
+.todo-list__actions-container {
+  padding: 0 20px;
+}
+
+.todo-list__actions {
   display: flex;
-  border-radius: 5px;
-  padding: 10px 0;
-  cursor: move;
-  width: 175px;
+  margin: 5px 0;
+  z-index: -999;
+}
+
+.todo-list__action:not(:first-of-type) {
+  margin-left: 10px;
 }
 
 .todo {
+  position: relative;
+  display: flex;
+  border-radius: 5px;
+  padding: 10px 0;
+  cursor: grab;
+  /* TODO: handle grabbing */
+  z-index: 1;
+}
+
+.todo__container {
+  position: relative;
+}
+
+.todo__content {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -120,4 +141,21 @@ ol {
 .todo__complete {
   background-color: transparent;
   border: none;
+  padding: 0 10px 0 20px;
+}
+
+.drag-to-confirm__item {
+  background-color: papayawhip;
+}
+
+.drag-to-confirm__actions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }

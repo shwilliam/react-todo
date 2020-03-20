@@ -1,5 +1,7 @@
 import React, {useCallback} from 'react'
 import {motion, useMotionValue, useTransform} from 'framer-motion'
+import {CheckIcon, TrashIcon} from '../components'
+
 const MIN_DRAG_RATIO_FOR_ACTION = 0.75
 
 const DragToConfirm = ({
@@ -7,6 +9,7 @@ const DragToConfirm = ({
   maxBounds = 50,
   onConfirm,
   onCancel,
+  className,
   children,
   ...props
 }) => {
@@ -14,7 +17,7 @@ const DragToConfirm = ({
   const background = useTransform(
     x,
     [minBounds, 0, maxBounds],
-    ['#FF5630', 'rgba(0,0,0,0)', '#36B37E'],
+    ['#FF5630', '#FFEFD5', '#36B37E'],
   )
 
   const handleDragEnd = useCallback(
@@ -29,15 +32,24 @@ const DragToConfirm = ({
   )
 
   return (
-    <motion.span
-      drag="x"
-      dragConstraints={{left: 0, right: 0}}
-      onDragEnd={handleDragEnd}
-      style={{x, background}}
-      {...props}
-    >
-      {children}
-    </motion.span>
+    <motion.div style={{background}} className="drag-to-confirm">
+      <motion.span
+        drag="x"
+        dragElastic={0.3}
+        dragConstraints={{left: 0, right: 0}}
+        onDragEnd={handleDragEnd}
+        style={{x}}
+        className={`drag-to-confirm__item ${className || ''}`}
+        {...props}
+      >
+        {children}
+      </motion.span>
+
+      <div className="drag-to-confirm__actions">
+        <CheckIcon color="papayawhip" />
+        <TrashIcon color="papayawhip" />
+      </div>
+    </motion.div>
   )
 }
 

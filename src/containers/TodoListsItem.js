@@ -29,30 +29,40 @@ const TodoListsItem = ({
   return (
     <li>
       <Card>
-        <h2 className="todo-list__title">{title}</h2>
+        <header className="todo-list__header">
+          <h2 className="todo-list__title">{title}</h2>
 
-        <TextForm onSubmit={handleTodoAdd} placeholder="Add a task..." />
+          <div className="todo-list__actions-container">
+            <TextForm onSubmit={handleTodoAdd} placeholder="Add a task..." />
 
-        <div className="todo-list__actions">
-          <button
-            className="button"
-            onClick={handleClearCompleted}
-            type="button"
-          >
-            clear completed
-          </button>
+            <div className="todo-list__action">
+              <button
+                className="button todo-list__action"
+                onClick={handleClearCompleted}
+                type="button"
+              >
+                clear completed
+              </button>
 
-          <button className="button" onClick={handleTodoDelete} type="button">
-            delete list
-          </button>
+              <button
+                className="button todo-list__action"
+                onClick={handleTodoDelete}
+                type="button"
+              >
+                delete list
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <div className="todo-list__content">
+          <TodoList
+            data={todos}
+            idx={idx}
+            onDelete={onTodoDelete}
+            onComplete={onTodoComplete}
+          />
         </div>
-
-        <TodoList
-          data={todos}
-          idx={idx}
-          onDelete={onTodoDelete}
-          onComplete={onTodoComplete}
-        />
       </Card>
     </li>
   )

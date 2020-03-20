@@ -16,9 +16,9 @@ const TodoListItem = ({idx, listIdx, title, done, onComplete, onDelete}) => {
   ])
 
   return (
-    <li>
+    <li className="todo__container">
       <DragToConfirm
-        className="todo__container"
+        className="todo"
         onConfirm={handleComplete}
         onCancel={handleDelete}
       >
@@ -30,14 +30,10 @@ const TodoListItem = ({idx, listIdx, title, done, onComplete, onDelete}) => {
           {done ? '🔳' : '⬜️'}
         </button>
 
-        <div className="todo">
+        <div className="todo__content">
           <h3 className="todo__title" data-done={done}>
             {title}
           </h3>
-
-          <button className="button" onClick={handleDelete} type="button">
-            delete
-          </button>
         </div>
       </DragToConfirm>
     </li>
