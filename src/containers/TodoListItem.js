@@ -30,11 +30,9 @@ const TodoListItem = ({idx, listIdx, title, done, onComplete, onDelete}) => {
           {done ? '🔳' : '⬜️'}
         </button>
 
-        <div className="todo__content">
-          <h3 className="todo__title" data-done={done}>
-            {title}
-          </h3>
-        </div>
+        <h3 className="todo__title" data-done={done}>
+          {title}
+        </h3>
       </DragToConfirm>
     </li>
   )

@@ -26,7 +26,7 @@ const App = () => {
   } = useTodoLists(initialTodos)
 
   return (
-    <div>
+    <>
       <header className="site__header">
         <h1 className="site__title">React Todo</h1>
         <p>You have {totalTodos} tasks</p>
@@ -45,7 +45,7 @@ const App = () => {
           onClearCompleted={clearCompleted}
         />
       </main>
-    </div>
+    </>
   )
 }
 

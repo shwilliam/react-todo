@@ -78,6 +78,7 @@ ol {
 .site__main {
   margin: 10px 0;
   display: inline-block;
+  width: 100%;
 }
 
 .todo-list__title {
@@ -92,7 +93,16 @@ ol {
 .todo-list {
   display: flex;
   flex-direction: row;
+  overflow-x: scroll;
+  scroll-snap-type: y mandatory;
   padding: 20px 0;
+  width: 100%;
+}
+
+.todo-list__item {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  width: 100%;
 }
 
 .todo-list__content {
@@ -125,13 +135,6 @@ ol {
 
 .todo__container {
   position: relative;
-}
-
-.todo__content {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin: 0 0 0 7.5px;
 }
 
 .todo__title {

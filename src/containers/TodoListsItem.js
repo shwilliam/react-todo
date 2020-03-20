@@ -27,7 +27,7 @@ const TodoListsItem = ({
   ])
 
   return (
-    <li>
+    <li className="todo-list__item">
       <Card>
         <header className="todo-list__header">
           <h2 className="todo-list__title">{title}</h2>
