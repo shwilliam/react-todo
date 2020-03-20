@@ -1,3 +1,4 @@
+export * from './DragToConfirm'
 export * from './TextForm'
 export * from './TodoLists'
 export * from './TodoListsItem'

@@ -100,7 +100,10 @@ ol {
 
 .todo__container {
   display: flex;
-  margin: 20px 0;
+  border-radius: 5px;
+  padding: 10px 0;
+  cursor: move;
+  width: 175px;
 }
 
 .todo {
@@ -112,7 +115,6 @@ ol {
 
 .todo__title {
   display: inline-block;
-  cursor: pointer;
 }
 
 .todo__complete {
