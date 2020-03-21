@@ -1,13 +1,22 @@
-const todoListsReducer = (todoLists, {type, title, listIdx, todoIdx, done}) => {
+import shortid from 'shortid'
+
+const todoListsReducer = (todoLists, {type, title, listId, todoId, done}) => {
   const todoListsCopy = [...todoLists]
+
+  const listIdx =
+    typeof listId !== 'undefined' &&
+    todoListsCopy.findIndex(({id}) => listId === id)
+
+  const todoIdx =
+    typeof todoId !== 'undefined' &&
+    todoListsCopy[listIdx].todos.findIndex(({id}) => todoId === id)
 
   switch (type) {
     case 'NEW_LIST':
-      return [...todoLists, {title, todos: []}]
+      return [...todoLists, {title, todos: [], id: shortid.generate()}]
 
     case 'DELETE_LIST':
-      todoListsCopy.splice(listIdx, 1)
-      return todoListsCopy
+      return todoListsCopy.filter(({id}) => id !== listId)
 
     case 'CLEAR_COMPLETE':
       todoListsCopy[listIdx].todos = todoListsCopy[listIdx].todos.filter(
@@ -19,7 +28,7 @@ const todoListsReducer = (todoLists, {type, title, listIdx, todoIdx, done}) => {
     case 'NEW_TODO':
       todoListsCopy[listIdx].todos = [
         ...todoListsCopy[listIdx].todos,
-        {title, content: ''},
+        {title, content: '', id: shortid.generate()},
       ]
       return todoListsCopy
 

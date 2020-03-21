@@ -3,8 +3,8 @@ import {TodoListsItem} from './TodoListsItem'
 
 const TodoLists = ({data, renderList, ...props}) => (
   <ol className="todo-list">
-    {data.map((d, i) => (
-      <TodoListsItem key={`todo__${i}`} idx={i} {...d} {...props} />
+    {data.map(d => (
+      <TodoListsItem key={`todo__${d.id}`} {...d} {...props} />
     ))}
   </ol>
 )

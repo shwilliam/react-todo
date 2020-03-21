@@ -1,13 +1,12 @@
 import React from 'react'
 import {TodoListItem} from './TodoListItem'
 
-const TodoList = ({data, idx, ...props}) => (
+const TodoList = ({data, id, ...props}) => (
   <ol className="todos">
-    {data.map((d, i) => (
+    {data.map(d => (
       <TodoListItem
-        key={`todo__${idx}--${i}`}
-        listIdx={idx}
-        idx={i}
+        key={`todo__${id}--${d.id}`}
+        listId={id}
         {...d}
         {...props}
       />

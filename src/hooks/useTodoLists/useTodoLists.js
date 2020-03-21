@@ -20,35 +20,34 @@ const useTodoLists = (initialTodoLists = []) => {
   )
 
   const deleteTodoList = useCallback(
-    list => dispatch({type: 'DELETE_LIST', listIdx: list}),
+    list => dispatch({type: 'DELETE_LIST', listId: list}),
     [],
   )
 
   const addTodo = useCallback(
-    (list, title) => dispatch({type: 'NEW_TODO', listIdx: list, title}),
+    (list, title) => dispatch({type: 'NEW_TODO', listId: list, title}),
     [],
   )
 
   const completeTodo = useCallback(
     (list, todo, done = true) =>
-      dispatch({type: 'COMPLETE_TODO', listIdx: list, todoIdx: todo, done}),
+      dispatch({type: 'COMPLETE_TODO', listId: list, todoId: todo, done}),
     [],
   )
 
   const updateTodo = useCallback(
     (list, todo, title) =>
-      dispatch({type: 'UPDATE_TODO', listIdx: list, todoIdx: todo, title}),
+      dispatch({type: 'UPDATE_TODO', listId: list, todoId: todo, title}),
     [],
   )
 
   const deleteTodo = useCallback(
-    (list, todo) =>
-      dispatch({type: 'DELETE_TODO', listIdx: list, todoIdx: todo}),
+    (list, todo) => dispatch({type: 'DELETE_TODO', listId: list, todoId: todo}),
     [],
   )
 
   const clearCompleted = useCallback(
-    list => dispatch({type: 'CLEAR_COMPLETE', listIdx: list}),
+    list => dispatch({type: 'CLEAR_COMPLETE', listId: list}),
     [],
   )
 

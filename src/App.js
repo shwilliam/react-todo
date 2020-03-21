@@ -1,14 +1,28 @@
 import React from 'react'
 import {TextForm, TodoLists, TodoList} from './containers'
 import {useTodoLists} from './hooks'
+import shortid from 'shortid'
 
 const initialTodos = [
   {
+    id: shortid.generate(),
     title: 'Welcome 👋',
     todos: [
-      {title: 'Add a new todo list', done: false},
-      {title: 'Add a task', done: false},
-      {title: 'Mark task as done', done: false},
+      {
+        id: shortid.generate(),
+        title: 'Add a new todo list',
+        done: false,
+      },
+      {
+        id: shortid.generate(),
+        title: 'Add a task',
+        done: false,
+      },
+      {
+        id: shortid.generate(),
+        title: 'Mark task as done',
+        done: false,
+      },
     ],
   },
 ]

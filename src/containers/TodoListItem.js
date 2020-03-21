@@ -3,32 +3,32 @@ import {DragToConfirm} from './DragToConfirm'
 import {ContentEditable} from './ContentEditable'
 
 const TodoListItem = ({
-  idx,
-  listIdx,
+  id,
+  listId,
   title,
   done,
   onComplete,
   onUpdate,
   onDelete,
 }) => {
-  const handleDelete = useCallback(() => onDelete(listIdx, idx), [
+  const handleDelete = useCallback(() => onDelete(listId, id), [
     onDelete,
-    listIdx,
-    idx,
+    listId,
+    id,
   ])
 
-  const handleComplete = useCallback(() => onComplete(listIdx, idx, !done), [
+  const handleComplete = useCallback(() => onComplete(listId, id, !done), [
     onComplete,
-    listIdx,
-    idx,
+    listId,
+    id,
     done,
   ])
 
   const handleSave = useCallback(
     title => {
-      onUpdate(listIdx, idx, title)
+      onUpdate(listId, id, title)
     },
-    [listIdx, idx, onUpdate],
+    [listId, id, onUpdate],
   )
 
   return (

@@ -6,7 +6,7 @@ import {Card} from '../components'
 const TodoListsItem = ({
   title,
   todos,
-  idx,
+  id,
   onListDelete,
   onTodoAdd,
   onTodoComplete,
@@ -14,17 +14,17 @@ const TodoListsItem = ({
   onTodoDelete,
   onClearCompleted,
 }) => {
-  const handleTodoAdd = useCallback(value => onTodoAdd(idx, value), [
-    idx,
+  const handleTodoAdd = useCallback(value => onTodoAdd(id, value), [
+    id,
     onTodoAdd,
   ])
-  const handleClearCompleted = useCallback(() => onClearCompleted(idx), [
+  const handleClearCompleted = useCallback(() => onClearCompleted(id), [
     onClearCompleted,
-    idx,
+    id,
   ])
-  const handleTodoDelete = useCallback(() => onListDelete(idx), [
+  const handleTodoDelete = useCallback(() => onListDelete(id), [
     onListDelete,
-    idx,
+    id,
   ])
 
   return (
@@ -59,7 +59,7 @@ const TodoListsItem = ({
         <div className="todo-list__content">
           <TodoList
             data={todos}
-            idx={idx}
+            id={id}
             onComplete={onTodoComplete}
             onUpdate={onTodoUpdate}
             onDelete={onTodoDelete}
