@@ -25,7 +25,7 @@ const initialTodos = [
       },
       {
         id: shortid.generate(),
-        label: 'Slide a task right to mark as done',
+        label: 'Tap or slide a task right to mark as done',
         done: false,
       },
       {
@@ -58,7 +58,9 @@ const App = () => {
       </header>
 
       <main className="site__main">
-        <TextForm onSubmit={addTodoList} placeholder="Add a list..." />
+        <div className="todo-list__main-actions">
+          <TextForm onSubmit={addTodoList} placeholder="Add a list..." />
+        </div>
 
         <TodoLists
           data={todoLists}
