@@ -49,13 +49,18 @@ const TodoListItem = ({
         colorLeft={colorLeft}
         colorRight="#FF5630"
       >
-        <button
-          className="button todo__complete"
-          onClick={handleComplete}
-          type="button"
-        >
-          {done ? '🔳' : '⬜️'}
-        </button>
+        <input
+          type="checkbox"
+          id={`todo__complete--${id}`}
+          className="sr-only"
+          checked={done}
+          onChange={handleComplete}
+        />
+        {/* FIXME: focus styles */}
+        <label htmlFor={`todo__complete--${id}`}>
+          <span className="sr-only">Mark as {done ? 'to do' : 'done'}</span>
+          <span className="todo__complete">{done ? '◉' : '◎'}</span>
+        </label>
 
         <h3 className="todo__label" data-done={done} onClick={handleClick}>
           <ContentEditable value={label} onSave={handleSave} />
