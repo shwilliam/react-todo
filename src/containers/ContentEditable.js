@@ -47,7 +47,7 @@ const ContentEditable = ({value = '', onSave}) => {
     return (
       <input
         type="text"
-        className="content-editable"
+        className="content-editable content-editable--input"
         ref={inputRef}
         onClick={handleClick}
         onKeyDown={handleKeyDown}

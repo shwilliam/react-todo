@@ -1,6 +1,7 @@
-import React, {useCallback} from 'react'
-import {DragToConfirm} from './DragToConfirm'
+import React, {useCallback, useMemo} from 'react'
+import {HDraggable} from './HDraggable'
 import {ContentEditable} from './ContentEditable'
+import {CheckIcon, TrashIcon, CrossIcon} from '../components'
 import {useDoubleClick} from '../hooks'
 
 const TodoListItem = ({
@@ -12,6 +13,9 @@ const TodoListItem = ({
   onUpdate,
   onDelete,
 }) => {
+  const IconLeft = useMemo(() => (done ? CrossIcon : CheckIcon), [done])
+  const colorLeft = useMemo(() => (done ? '#FFAB00' : '#36B37E'), [done])
+
   const handleDelete = useCallback(() => onDelete(listId, id), [
     onDelete,
     listId,
@@ -36,10 +40,14 @@ const TodoListItem = ({
 
   return (
     <li className="todo__container">
-      <DragToConfirm
+      <HDraggable
         className="todo"
-        onConfirm={handleComplete}
-        onCancel={handleDelete}
+        onDragRight={handleComplete}
+        onDragLeft={handleDelete}
+        IconLeft={IconLeft}
+        IconRight={TrashIcon}
+        colorLeft={colorLeft}
+        colorRight="#FF5630"
       >
         <button
           className="button todo__complete"
@@ -52,7 +60,7 @@ const TodoListItem = ({
         <h3 className="todo__title" data-done={done} onClick={handleClick}>
           <ContentEditable value={title} onSave={handleSave} />
         </h3>
-      </DragToConfirm>
+      </HDraggable>
     </li>
   )
 }

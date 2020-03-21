@@ -1,14 +1,17 @@
 import React, {useCallback} from 'react'
 import {motion, useMotionValue, useTransform} from 'framer-motion'
-import {CheckIcon, TrashIcon} from '../components'
 
 const MIN_DRAG_RATIO_FOR_ACTION = 0.75
 
-const DragToConfirm = ({
+const HDraggable = ({
   minBounds = -50,
   maxBounds = 50,
-  onConfirm,
-  onCancel,
+  onDragRight,
+  onDragLeft,
+  IconRight,
+  IconLeft,
+  colorLeft,
+  colorRight,
   className,
   children,
   ...props
@@ -17,18 +20,18 @@ const DragToConfirm = ({
   const background = useTransform(
     x,
     [minBounds, 0, maxBounds],
-    ['#FF5630', '#FFEFD5', '#36B37E'],
+    [colorRight, '#FFEFD5', colorLeft],
   )
 
   const handleDragEnd = useCallback(
     (_, {point}) => {
       if (point.x > maxBounds * MIN_DRAG_RATIO_FOR_ACTION) {
-        onConfirm()
+        onDragRight()
       } else if (point.x < minBounds * MIN_DRAG_RATIO_FOR_ACTION) {
-        onCancel()
+        onDragLeft()
       }
     },
-    [maxBounds, minBounds, onConfirm, onCancel],
+    [maxBounds, minBounds, onDragRight, onDragLeft],
   )
 
   return (
@@ -46,11 +49,11 @@ const DragToConfirm = ({
       </motion.span>
 
       <div className="drag-to-confirm__actions">
-        <CheckIcon color="papayawhip" />
-        <TrashIcon color="papayawhip" />
+        <IconLeft />
+        <IconRight />
       </div>
     </motion.div>
   )
 }
 
-export {DragToConfirm}
+export {HDraggable}

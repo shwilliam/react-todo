@@ -1,5 +1,5 @@
 export * from './ContentEditable'
-export * from './DragToConfirm'
+export * from './HDraggable'
 export * from './TextForm'
 export * from './TodoLists'
 export * from './TodoListsItem'
