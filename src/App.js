@@ -11,16 +11,26 @@ const initialTodos = [
       {
         id: shortid.generate(),
         title: 'Add a new todo list',
-        done: false,
+        done: true,
       },
       {
         id: shortid.generate(),
         title: 'Add a task',
+        done: true,
+      },
+      {
+        id: shortid.generate(),
+        title: 'Double-click a task to edit it',
         done: false,
       },
       {
         id: shortid.generate(),
-        title: 'Mark task as done',
+        title: 'Slide a task right to mark as done',
+        done: false,
+      },
+      {
+        id: shortid.generate(),
+        title: 'Slide it left to delete it',
         done: false,
       },
     ],
