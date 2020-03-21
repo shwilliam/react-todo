@@ -9,8 +9,9 @@ const TodoListsItem = ({
   idx,
   onListDelete,
   onTodoAdd,
-  onTodoDelete,
   onTodoComplete,
+  onTodoUpdate,
+  onTodoDelete,
   onClearCompleted,
 }) => {
   const handleTodoAdd = useCallback(value => onTodoAdd(idx, value), [
@@ -59,8 +60,9 @@ const TodoListsItem = ({
           <TodoList
             data={todos}
             idx={idx}
-            onDelete={onTodoDelete}
             onComplete={onTodoComplete}
+            onUpdate={onTodoUpdate}
+            onDelete={onTodoDelete}
           />
         </div>
       </Card>

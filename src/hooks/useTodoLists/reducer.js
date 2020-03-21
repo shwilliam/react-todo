@@ -30,6 +30,13 @@ const todoListsReducer = (todoLists, {type, title, listIdx, todoIdx, done}) => {
       }
       return todoListsCopy
 
+    case 'UPDATE_TODO':
+      todoListsCopy[listIdx].todos[todoIdx] = {
+        ...todoListsCopy[listIdx].todos[todoIdx],
+        title,
+      }
+      return todoListsCopy
+
     case 'DELETE_TODO':
       if (
         todoListsCopy[listIdx].todos[todoIdx].done ||

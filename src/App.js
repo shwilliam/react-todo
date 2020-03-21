@@ -20,8 +20,9 @@ const App = () => {
     addTodoList,
     deleteTodoList,
     addTodo,
-    deleteTodo,
     completeTodo,
+    updateTodo,
+    deleteTodo,
     clearCompleted,
   } = useTodoLists(initialTodos)
 
@@ -40,8 +41,9 @@ const App = () => {
           renderList={TodoList}
           onListDelete={deleteTodoList}
           onTodoAdd={addTodo}
-          onTodoDelete={deleteTodo}
           onTodoComplete={completeTodo}
+          onTodoUpdate={updateTodo}
+          onTodoDelete={deleteTodo}
           onClearCompleted={clearCompleted}
         />
       </main>

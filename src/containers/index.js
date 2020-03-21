@@ -1,3 +1,4 @@
+export * from './ContentEditable'
 export * from './DragToConfirm'
 export * from './TextForm'
 export * from './TodoLists'
