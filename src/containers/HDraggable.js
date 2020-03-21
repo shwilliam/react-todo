@@ -1,8 +1,9 @@
-import React, {useCallback} from 'react'
+import React, {useCallback, useState, useEffect} from 'react'
 import {motion, useMotionValue, useTransform} from 'framer-motion'
 import {stopEventPropagation} from '../utils'
 
 const MIN_DRAG_RATIO_FOR_ACTION = 0.75
+const ICON_TRANSITION_DELAY = 300
 
 const HDraggable = ({
   minBounds = -50,
@@ -17,11 +18,13 @@ const HDraggable = ({
   children,
   ...props
 }) => {
+  const [currentIconLeft, setCurrentIconLeft] = useState(IconLeft)
+  const [currentColorLeft, setCurrentColorLeft] = useState(colorLeft)
   const x = useMotionValue(0)
   const background = useTransform(
     x,
     [minBounds, 0, maxBounds],
-    [colorRight, '#FFEFD5', colorLeft],
+    [colorRight, '#FFEFD5', currentColorLeft],
   )
 
   const handleDragEnd = useCallback(
@@ -40,6 +43,13 @@ const HDraggable = ({
     [x],
   )
 
+  useEffect(() => {
+    setTimeout(() => {
+      setCurrentIconLeft(IconLeft)
+      setCurrentColorLeft(colorLeft)
+    }, ICON_TRANSITION_DELAY)
+  }, [IconLeft, colorLeft])
+
   return (
     <motion.div style={{background}} className="drag-to-confirm">
       <motion.span
@@ -56,7 +66,7 @@ const HDraggable = ({
       </motion.span>
 
       <div className="drag-to-confirm__actions">
-        <IconLeft />
+        {currentIconLeft}
         <IconRight />
       </div>
     </motion.div>
