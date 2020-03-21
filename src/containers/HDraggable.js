@@ -1,5 +1,6 @@
 import React, {useCallback} from 'react'
 import {motion, useMotionValue, useTransform} from 'framer-motion'
+import {stopEventPropagation} from '../utils'
 
 const MIN_DRAG_RATIO_FOR_ACTION = 0.75
 
@@ -34,6 +35,11 @@ const HDraggable = ({
     [maxBounds, minBounds, onDragRight, onDragLeft],
   )
 
+  const handleClickCapture = useCallback(
+    e => (x.current > 1 || x.current < -1) && stopEventPropagation(e),
+    [x],
+  )
+
   return (
     <motion.div style={{background}} className="drag-to-confirm">
       <motion.span
@@ -41,6 +47,7 @@ const HDraggable = ({
         dragElastic={0.3}
         dragConstraints={{left: 0, right: 0}}
         onDragEnd={handleDragEnd}
+        onClickCapture={handleClickCapture}
         style={{x}}
         className={`drag-to-confirm__item ${className || ''}`}
         {...props}
