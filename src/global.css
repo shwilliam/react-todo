@@ -81,7 +81,7 @@ ol {
   background-color: var(--color__card);
   border: 1px solid #222;
   border-radius: 5px;
-  margin: 0 20px;
+  margin: 0 10px 0 20px;
 }
 
 [data-done='true'] {
@@ -130,7 +130,7 @@ ol {
 .todo-list__item {
   flex-shrink: 0;
   scroll-snap-align: start;
-  width: 100%;
+  width: 85%;
 }
 
 .todo-list__actions-container {
