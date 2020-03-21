@@ -7,7 +7,7 @@ import {useDoubleClick} from '../hooks'
 const TodoListItem = ({
   id,
   listId,
-  title,
+  label,
   done,
   onComplete,
   onUpdate,
@@ -30,8 +30,8 @@ const TodoListItem = ({
   ])
 
   const handleSave = useCallback(
-    title => {
-      onUpdate(listId, id, title)
+    label => {
+      onUpdate(listId, id, label)
     },
     [listId, id, onUpdate],
   )
@@ -57,8 +57,8 @@ const TodoListItem = ({
           {done ? '🔳' : '⬜️'}
         </button>
 
-        <h3 className="todo__title" data-done={done} onClick={handleClick}>
-          <ContentEditable value={title} onSave={handleSave} />
+        <h3 className="todo__label" data-done={done} onClick={handleClick}>
+          <ContentEditable value={label} onSave={handleSave} />
         </h3>
       </HDraggable>
     </li>

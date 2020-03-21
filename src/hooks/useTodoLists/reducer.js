@@ -1,6 +1,9 @@
 import shortid from 'shortid'
 
-const todoListsReducer = (todoLists, {type, title, listId, todoId, done}) => {
+const todoListsReducer = (
+  todoLists,
+  {type, title, label, listId, todoId, done},
+) => {
   const todoListsCopy = [...todoLists]
 
   const listIdx =
@@ -28,7 +31,7 @@ const todoListsReducer = (todoLists, {type, title, listId, todoId, done}) => {
     case 'NEW_TODO':
       todoListsCopy[listIdx].todos = [
         ...todoListsCopy[listIdx].todos,
-        {title, content: '', id: shortid.generate()},
+        {label, content: '', id: shortid.generate()},
       ]
       return todoListsCopy
 
@@ -42,7 +45,7 @@ const todoListsReducer = (todoLists, {type, title, listId, todoId, done}) => {
     case 'UPDATE_TODO':
       todoListsCopy[listIdx].todos[todoIdx] = {
         ...todoListsCopy[listIdx].todos[todoIdx],
-        title,
+        label,
       }
       return todoListsCopy
 

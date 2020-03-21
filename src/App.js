@@ -10,27 +10,27 @@ const initialTodos = [
     todos: [
       {
         id: shortid.generate(),
-        title: 'Add a new todo list',
+        label: 'Add a new todo list',
         done: true,
       },
       {
         id: shortid.generate(),
-        title: 'Add a task',
+        label: 'Add a task',
         done: true,
       },
       {
         id: shortid.generate(),
-        title: 'Double-click a task to edit it',
+        label: 'Double-click a task to edit it',
         done: false,
       },
       {
         id: shortid.generate(),
-        title: 'Slide a task right to mark as done',
+        label: 'Slide a task right to mark as done',
         done: false,
       },
       {
         id: shortid.generate(),
-        title: 'Slide it left to delete it',
+        label: 'Slide it left to delete it',
         done: false,
       },
     ],

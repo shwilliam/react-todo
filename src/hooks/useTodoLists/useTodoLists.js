@@ -25,7 +25,7 @@ const useTodoLists = (initialTodoLists = []) => {
   )
 
   const addTodo = useCallback(
-    (list, title) => dispatch({type: 'NEW_TODO', listId: list, title}),
+    (list, label) => dispatch({type: 'NEW_TODO', listId: list, label}),
     [],
   )
 
@@ -36,8 +36,8 @@ const useTodoLists = (initialTodoLists = []) => {
   )
 
   const updateTodo = useCallback(
-    (list, todo, title) =>
-      dispatch({type: 'UPDATE_TODO', listId: list, todoId: todo, title}),
+    (list, todo, label) =>
+      dispatch({type: 'UPDATE_TODO', listId: list, todoId: todo, label}),
     [],
   )
 

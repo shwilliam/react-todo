@@ -1,5 +1,6 @@
 :root {
   --color__bg: #fee;
+  --color__card: papayawhip;
 }
 
 html,
@@ -57,7 +58,7 @@ ol {
 
 .card {
   overflow: hidden;
-  background-color: papayawhip;
+  background-color: var(--color__card);
   border: 1px solid #222;
   border-radius: 5px;
   margin-right: 20px;
@@ -82,7 +83,7 @@ ol {
 }
 
 .todo-list__title {
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
 }
 
 .todo-list__header {
@@ -105,12 +106,8 @@ ol {
   width: 100%;
 }
 
-.todo-list__content {
-  padding: 10px 0;
-}
-
 .todo-list__actions-container {
-  padding: 0 20px;
+  padding: 10px 20px 10px 20px;
 }
 
 .todo-list__actions {
@@ -127,7 +124,7 @@ ol {
   position: relative;
   display: flex;
   border-radius: 5px;
-  padding: 10px 0;
+  padding: 15px 0;
   cursor: grab;
   /* TODO: handle grabbing */
   z-index: 1;
@@ -137,8 +134,9 @@ ol {
   position: relative;
 }
 
-.todo__title {
+.todo__label {
   display: inline-block;
+  width: 75%;
 }
 
 .todo__complete {
@@ -148,7 +146,7 @@ ol {
 }
 
 .drag-to-confirm__item {
-  background-color: papayawhip;
+  background-color: var(--color__card);
 }
 
 .drag-to-confirm__actions {
@@ -161,4 +159,19 @@ ol {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
+}
+
+.content-editable {
+  cursor: text;
+}
+
+.content-editable--input {
+  width: 100%;
+  display: block;
+}
+
+@media only screen and (min-width: 560px) {
+  .todo-list__item {
+    width: 400px;
+  }
 }
