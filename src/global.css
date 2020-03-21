@@ -51,6 +51,14 @@ ol {
   opacity: 1;
 }
 
+.checkbox + .label .label__icon {
+  border: 2px solid transparent;
+}
+
+.checkbox:focus + .label .label__icon {
+  border-color: rgb(59, 153, 252);
+}
+
 .button {
   font: inherit;
   cursor: pointer;
@@ -159,7 +167,7 @@ ol {
 .todo__complete {
   background-color: transparent;
   border: none;
-  padding: 0 10px 0 20px;
+  margin: 0 10px 0 20px;
 }
 
 .drag-to-confirm__item {
