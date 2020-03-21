@@ -56,15 +56,13 @@ const TodoListsItem = ({
           </div>
         </header>
 
-        <div className="todo-list__content">
-          <TodoList
-            data={todos}
-            id={id}
-            onComplete={onTodoComplete}
-            onUpdate={onTodoUpdate}
-            onDelete={onTodoDelete}
-          />
-        </div>
+        <TodoList
+          data={todos}
+          id={id}
+          onComplete={onTodoComplete}
+          onUpdate={onTodoUpdate}
+          onDelete={onTodoDelete}
+        />
       </Card>
     </li>
   )

@@ -1,6 +1,7 @@
 import React, {useCallback} from 'react'
 import {DragToConfirm} from './DragToConfirm'
 import {ContentEditable} from './ContentEditable'
+import {useDoubleClick} from '../hooks'
 
 const TodoListItem = ({
   id,
@@ -31,6 +32,8 @@ const TodoListItem = ({
     [listId, id, onUpdate],
   )
 
+  const handleClick = useDoubleClick(handleComplete, null)
+
   return (
     <li className="todo__container">
       <DragToConfirm
@@ -46,7 +49,7 @@ const TodoListItem = ({
           {done ? '🔳' : '⬜️'}
         </button>
 
-        <h3 className="todo__title" data-done={done}>
+        <h3 className="todo__title" data-done={done} onClick={handleClick}>
           <ContentEditable value={title} onSave={handleSave} />
         </h3>
       </DragToConfirm>

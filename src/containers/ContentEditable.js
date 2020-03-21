@@ -1,25 +1,32 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react'
+import {useDoubleClick} from '../hooks'
 
 const ContentEditable = ({value = '', onSave}) => {
   const [inputValue, setInputValue] = useState(value)
   const [isEditing, setIsEditing] = useState(false)
   const inputRef = useRef(null)
 
-  useEffect(() => {
-    if (isEditing) inputRef.current.focus()
-  }, [isEditing])
-
-  const handleClick = useCallback(() => {
+  const handleDoubleClick = useCallback(() => {
     setIsEditing(true)
+    inputRef.current.select()
   }, [])
 
-  const handleSave = useCallback(() => {
-    setIsEditing(false)
+  const handleClick = useDoubleClick(null, handleDoubleClick)
 
-    Promise.resolve().then(() => {
-      setInputValue(inputRef.current.innerText)
-      onSave(inputRef.current.innerText)
-    })
+  const handleChange = useCallback(
+    e => {
+      const inputValue = e.target.value
+      setInputValue(inputValue)
+      onSave(inputValue)
+    },
+    [onSave],
+  )
+
+  const handleSave = useCallback(() => {
+    const inputValue = inputRef.current.value
+    setIsEditing(false)
+    setInputValue(inputValue)
+    onSave(inputValue)
   }, [onSave])
 
   const handleKeyDown = useCallback(
@@ -32,16 +39,27 @@ const ContentEditable = ({value = '', onSave}) => {
     [handleSave, isEditing],
   )
 
+  useEffect(() => {
+    if (isEditing) inputRef.current.focus()
+  }, [isEditing])
+
+  if (isEditing)
+    return (
+      <input
+        type="text"
+        className="content-editable"
+        ref={inputRef}
+        onClick={handleClick}
+        onKeyDown={handleKeyDown}
+        onBlur={handleSave}
+        value={inputValue}
+        onChange={handleChange}
+      />
+    )
+
   return (
-    <p
-      contentEditable={isEditing}
-      suppressContentEditableWarning
-      ref={inputRef}
-      onClick={handleClick}
-      onKeyDown={handleKeyDown}
-      onBlur={handleSave}
-    >
-      {inputValue}
+    <p className="content-editable" onClick={handleClick}>
+      {inputValue || value}
     </p>
   )
 }
