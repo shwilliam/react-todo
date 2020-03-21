@@ -1,17 +1,12 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react'
-import {useDoubleClick} from '../hooks'
+import {stopEventPropagation} from '../utils'
 
 const ContentEditable = ({value = '', onSave}) => {
   const [inputValue, setInputValue] = useState(value)
   const [isEditing, setIsEditing] = useState(false)
   const inputRef = useRef(null)
 
-  const handleDoubleClick = useCallback(() => {
-    setIsEditing(true)
-    inputRef.current.select()
-  }, [])
-
-  const handleClick = useDoubleClick(null, handleDoubleClick)
+  const handleDoubleClick = useCallback(() => setIsEditing(true), [])
 
   const handleChange = useCallback(
     e => {
@@ -49,7 +44,7 @@ const ContentEditable = ({value = '', onSave}) => {
         type="text"
         className="content-editable content-editable--input"
         ref={inputRef}
-        onClick={handleClick}
+        onClick={stopEventPropagation}
         onKeyDown={handleKeyDown}
         onBlur={handleSave}
         value={inputValue}
@@ -58,7 +53,7 @@ const ContentEditable = ({value = '', onSave}) => {
     )
 
   return (
-    <p className="content-editable" onClick={handleClick}>
+    <p className="content-editable" onDoubleClick={handleDoubleClick}>
       {inputValue || value}
     </p>
   )
