@@ -7,9 +7,13 @@ const useInput = (initialValue = '', onSubmit = () => {}) => {
 
   const handleSubmit = useCallback(
     e => {
-      onSubmit(input)
-      setInput('')
       e.preventDefault()
+      const inputValue = input.trim()
+
+      if (!inputValue.length) return
+
+      onSubmit(inputValue)
+      setInput('')
     },
     [onSubmit, input],
   )
