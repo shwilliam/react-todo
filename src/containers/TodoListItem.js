@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo} from 'react'
+import React, {useCallback, useMemo, useState} from 'react'
 import {HDraggable} from './HDraggable'
 import {ContentEditable} from './ContentEditable'
 import {CheckIcon, TrashIcon, CrossIcon} from '../components'
@@ -13,6 +13,7 @@ const TodoListItem = ({
   onUpdate,
   onDelete,
 }) => {
+  const [isEditing, setIsEditing] = useState(false)
   const IconLeft = useMemo(() => (done ? CrossIcon : CheckIcon), [done])
   const colorLeft = useMemo(() => (done ? '#FFAB00' : '#36B37E'), [done])
 
@@ -38,10 +39,15 @@ const TodoListItem = ({
 
   const handleClick = useDoubleClick(handleComplete, null)
 
+  const handleEditStart = useCallback(() => setIsEditing(true), [])
+
+  const handleEditEnd = useCallback(() => setIsEditing(false), [])
+
   return (
     <li className="todo__container">
       <HDraggable
         className="todo"
+        disabled={isEditing}
         onDragRight={handleComplete}
         onDragLeft={handleDelete}
         IconLeft={IconLeft}
@@ -62,7 +68,12 @@ const TodoListItem = ({
         </label>
 
         <h3 className="todo__label" data-done={done} onClick={handleClick}>
-          <ContentEditable value={label} onSave={handleSave} />
+          <ContentEditable
+            value={label}
+            onEditStart={handleEditStart}
+            onEditEnd={handleEditEnd}
+            onSave={handleSave}
+          />
         </h3>
       </HDraggable>
     </li>

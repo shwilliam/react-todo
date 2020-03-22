@@ -1,4 +1,4 @@
-import React, {useCallback, useState, useEffect} from 'react'
+import React, {useCallback, useState, useEffect, useMemo} from 'react'
 import {motion, useMotionValue, useTransform} from 'framer-motion'
 import {stopEventPropagation} from '../utils'
 
@@ -14,6 +14,7 @@ const HDraggable = ({
   IconLeft,
   colorLeft,
   colorRight,
+  disabled = false,
   className,
   children,
   ...props
@@ -43,6 +44,8 @@ const HDraggable = ({
     [x],
   )
 
+  const dragElastic = useMemo(() => (disabled ? 0 : 0.3), [disabled])
+
   useEffect(() => {
     setTimeout(() => {
       setCurrentIconLeft(IconLeft)
@@ -54,7 +57,7 @@ const HDraggable = ({
     <motion.div style={{background}} className="drag-to-confirm">
       <motion.span
         drag="x"
-        dragElastic={0.3}
+        dragElastic={dragElastic}
         dragConstraints={{left: 0, right: 0}}
         onDragEnd={handleDragEnd}
         onClickCapture={handleClickCapture}

@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react'
 import {stopEventPropagation} from '../utils'
 
-const ContentEditable = ({value = '', onSave}) => {
+const ContentEditable = ({value = '', onEditStart, onEditEnd, onSave}) => {
   const [inputValue, setInputValue] = useState(value)
   const [isEditing, setIsEditing] = useState(false)
   const inputRef = useRef(null)
@@ -35,8 +35,13 @@ const ContentEditable = ({value = '', onSave}) => {
   )
 
   useEffect(() => {
-    if (isEditing) inputRef.current.focus()
-  }, [isEditing])
+    if (isEditing) {
+      inputRef.current.focus()
+      onEditStart()
+    } else {
+      onEditEnd()
+    }
+  }, [isEditing, onEditStart, onEditEnd])
 
   if (isEditing)
     return (
