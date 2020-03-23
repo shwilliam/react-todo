@@ -1,7 +1,11 @@
-import React, {useCallback} from 'react'
+import React, {useCallback, useState} from 'react'
 import {TextForm} from './TextForm'
 import {TodoList} from './TodoList'
-import {Card} from '../components'
+import {CardHeader} from './CardHeader'
+import {InteractiveCard, CardContent, Overlay} from './InteractiveCard'
+
+// TODO: abstract throttled toggle to custom hook
+let lastToggle = performance.now()
 
 const TodoListsItem = ({
   title,
@@ -14,6 +18,15 @@ const TodoListsItem = ({
   onTodoDelete,
   onClearCompleted,
 }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const toggleIsOpen = useCallback(() => {
+    // throttle toggle
+    const now = performance.now()
+    if (now - lastToggle > 400) {
+      setIsOpen(s => !s)
+      lastToggle = now
+    }
+  }, [])
   const handleTodoAdd = useCallback(value => onTodoAdd(id, value), [
     id,
     onTodoAdd,
@@ -29,10 +42,18 @@ const TodoListsItem = ({
 
   return (
     <li className="todo-list__item">
-      <Card>
-        <header className="todo-list__header">
-          <h2 className="todo-list__title">{title}</h2>
+      <Overlay isSelected={isOpen} />
 
+      <InteractiveCard isOpen={isOpen} onToggle={toggleIsOpen}>
+        <header className="todo-list__header">
+          <CardHeader isSelected={isOpen} onClick={toggleIsOpen}>
+            <h2 className="todo-list__title">{title}</h2>
+          </CardHeader>
+        </header>
+
+        <CardContent isOpen={!isOpen}>Tap header to open</CardContent>
+
+        <CardContent isOpen={isOpen}>
           <div className="todo-list__actions-container">
             <TextForm onSubmit={handleTodoAdd} placeholder="Add a task..." />
 
@@ -54,16 +75,15 @@ const TodoListsItem = ({
               </button>
             </div>
           </div>
-        </header>
-
-        <TodoList
-          data={todos}
-          id={id}
-          onComplete={onTodoComplete}
-          onUpdate={onTodoUpdate}
-          onDelete={onTodoDelete}
-        />
-      </Card>
+          <TodoList
+            data={todos}
+            id={id}
+            onComplete={onTodoComplete}
+            onUpdate={onTodoUpdate}
+            onDelete={onTodoDelete}
+          />
+        </CardContent>
+      </InteractiveCard>
     </li>
   )
 }

@@ -33,6 +33,11 @@ const initialTodos = [
         label: 'Slide it left to delete it',
         done: false,
       },
+      {
+        id: shortid.generate(),
+        label: 'Slide the list up or down to dismiss it',
+        done: false,
+      },
     ],
   },
 ]
@@ -51,17 +56,17 @@ const App = () => {
   } = useTodoLists(initialTodos)
 
   return (
-    <>
+    <div className="site__container">
       <header className="site__header">
         <h1 className="site__title">React Todo</h1>
         <p>You have {totalTodos} tasks</p>
+
+        <div className="site__header-actions">
+          <TextForm onSubmit={addTodoList} placeholder="Add a list..." />
+        </div>
       </header>
 
       <main className="site__main">
-        <div className="todo-list__main-actions">
-          <TextForm onSubmit={addTodoList} placeholder="Add a list..." />
-        </div>
-
         <TodoLists
           data={todoLists}
           renderList={TodoList}
@@ -73,7 +78,7 @@ const App = () => {
           onClearCompleted={clearCompleted}
         />
       </main>
-    </>
+    </div>
   )
 }
 

@@ -1,5 +1,9 @@
 import React from 'react'
 
-const Card = ({children}) => <div className="card">{children}</div>
+const Card = ({children, open, ...props}) => (
+  <div className={`card ${open ? 'card--open' : ''}`} {...props}>
+    {children}
+  </div>
+)
 
 export {Card}

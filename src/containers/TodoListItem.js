@@ -1,4 +1,5 @@
 import React, {useCallback, useMemo, useState} from 'react'
+import {motion} from 'framer-motion'
 import {HDraggable} from './HDraggable'
 import {ContentEditable} from './ContentEditable'
 import {CheckIcon, TrashIcon, CrossIcon} from '../components'
@@ -44,7 +45,12 @@ const TodoListItem = ({
   const handleEditEnd = useCallback(() => setIsEditing(false), [])
 
   return (
-    <li className="todo__container">
+    <motion.li
+      className="todo__container"
+      initial={{opacity: 0, scaleY: 0}}
+      animate={{opacity: 1, scaleY: 1}}
+      exit={{opacity: 0, scaleY: 0}}
+    >
       <HDraggable
         className="todo"
         disabled={isEditing}
@@ -76,7 +82,7 @@ const TodoListItem = ({
           />
         </h3>
       </HDraggable>
-    </li>
+    </motion.li>
   )
 }
 

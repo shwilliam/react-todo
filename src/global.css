@@ -11,6 +11,12 @@ body {
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   color: #222;
   margin: 0;
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+  overflow-x: scroll;
 }
 
 p,
@@ -77,15 +83,53 @@ ol {
 }
 
 .card {
-  overflow: hidden;
+  width: 100%;
+  height: 50vh;
+  position: relative;
+  display: block;
+  pointer-events: none;
+}
+
+.card--open {
+  top: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 1;
+}
+
+.card__content {
+  pointer-events: auto;
+  position: relative;
   background-color: var(--color__card);
   border: 1px solid #222;
   border-radius: 5px;
-  margin: 0 10px 0 20px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.card__content--open {
+  margin: 1rem auto;
+  height: 80vh;
+  width: 80vw;
+  overflow-y: scroll;
 }
 
 [data-done='true'] {
   text-decoration: line-through;
+}
+
+.site__container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100vw;
+  grid-template-rows: 200px 1fr;
+  grid-template-areas:
+    'header'
+    'main';
 }
 
 .site__title {
@@ -94,17 +138,27 @@ ol {
 }
 
 .site__header {
-  margin: 20px 20px 10px 20px;
+  max-width: 150px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  grid-area: header;
+  margin: 20px auto 10px auto;
+}
+
+.site__header-actions {
+  margin-top: 1rem;
 }
 
 .site__main {
+  grid-area: main;
   display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   width: 100%;
   margin: 10px 0;
-}
-
-.todo-list__main-actions {
-  margin: 0 20px 10px 20px;
 }
 
 .todo-list__title {
@@ -114,8 +168,12 @@ ol {
 }
 
 .todo-list__header {
-  border-bottom: 1px solid #222;
+  background-color: var(--color__card);
   padding-bottom: 12.5px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  border-bottom: 1px solid #222;
 }
 
 .todo-list {
@@ -123,14 +181,22 @@ ol {
   flex-direction: row;
   overflow-x: scroll;
   scroll-snap-type: y mandatory;
-  padding: 20px 0;
-  width: 100%;
+  padding: 20px 10%;
 }
 
 .todo-list__item {
   flex-shrink: 0;
-  scroll-snap-align: start;
-  width: 85%;
+  scroll-snap-align: center;
+  width: 80%;
+  margin: 0 5%;
+}
+
+.todo-list__item:first-of-type {
+  padding-left: 7.5%;
+}
+
+.todo-list__item:last-of-type {
+  padding-right: 20%;
 }
 
 .todo-list__actions-container {
@@ -193,6 +259,18 @@ ol {
 .content-editable--input {
   width: 100%;
   display: block;
+}
+
+.card__overlay {
+  z-index: 1;
+  position: fixed;
+  background-color: var(--color__bg);
+  will-change: opacity;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
 }
 
 @media only screen and (min-width: 560px) {
