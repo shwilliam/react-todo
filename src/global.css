@@ -1,6 +1,10 @@
 :root {
-  --color__bg: #fee;
-  --color__card: papayawhip;
+  --color__bg: papayawhip;
+  --color__ui--default: #f4f4f4;
+  --color__ui--light: #fff;
+  --color__accent--danger: #fa4d56;
+  --color__accent--success: #42be65;
+  --color__accent--warn: #f1c21b;
 }
 
 html,
@@ -16,7 +20,6 @@ body {
 
 #root {
   height: 100%;
-  overflow-x: scroll;
 }
 
 p,
@@ -84,7 +87,7 @@ ol {
 
 .card {
   width: 100%;
-  height: 50vh;
+  height: 170px;
   position: relative;
   display: block;
   pointer-events: none;
@@ -101,7 +104,7 @@ ol {
 .card__content {
   pointer-events: auto;
   position: relative;
-  background-color: var(--color__card);
+  background-color: var(--color__ui--light);
   border: 1px solid #222;
   border-radius: 5px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.1);
@@ -167,13 +170,16 @@ ol {
   margin: 20px 20px 0 20px;
 }
 
+.todo-list__subtitle {
+  margin: 30px 20px 10px 20px;
+}
+
 .todo-list__header {
-  background-color: var(--color__card);
+  background-color: var(--color__ui--light);
   padding-bottom: 12.5px;
   position: sticky;
   top: 0;
   z-index: 2;
-  border-bottom: 1px solid #222;
 }
 
 .todo-list {
@@ -182,6 +188,7 @@ ol {
   overflow-x: scroll;
   scroll-snap-type: y mandatory;
   padding: 20px 10%;
+  height: 100%;
 }
 
 .todo-list__item {
@@ -237,7 +244,7 @@ ol {
 }
 
 .drag-to-confirm__item {
-  background-color: var(--color__card);
+  background-color: var(--color__ui--light);
 }
 
 .drag-to-confirm__actions {
@@ -271,6 +278,31 @@ ol {
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.progress-bar__container {
+  flex-grow: 1;
+  position: relative;
+  height: 12.5px;
+  overflow: hidden;
+  background-color: var(--color__ui--default);
+}
+
+.progress-bar {
+  transform-origin: left;
+  height: 12.5px;
+}
+
+.progress__text {
+  font-size: 0.75rem;
+  opacity: 0.65;
+  padding: 0 0 0 0.5rem;
 }
 
 @media only screen and (min-width: 560px) {

@@ -1,8 +1,9 @@
-import React, {useCallback, useState} from 'react'
+import React, {useCallback, useState, useMemo} from 'react'
 import {TextForm} from './TextForm'
 import {TodoList} from './TodoList'
 import {CardHeader} from './CardHeader'
 import {InteractiveCard, CardContent, Overlay} from './InteractiveCard'
+import {ProgressBar} from './ProgressBar'
 
 // TODO: abstract throttled toggle to custom hook
 let lastToggle = performance.now()
@@ -39,6 +40,12 @@ const TodoListsItem = ({
     onListDelete,
     id,
   ])
+  const todosRemaining = todos.filter(({done}) => !done).length
+  const todosProgress = useMemo(() => {
+    if (!todos || !todos.length) return 0
+    const totalTodos = todos.length
+    return (totalTodos - todosRemaining) / totalTodos
+  }, [todos, todosRemaining])
 
   return (
     <li className="todo-list__item">
@@ -48,10 +55,12 @@ const TodoListsItem = ({
         <header className="todo-list__header">
           <CardHeader isSelected={isOpen} onClick={toggleIsOpen}>
             <h2 className="todo-list__title">{title}</h2>
+            <p className="todo-list__subtitle">
+              {todosRemaining} tasks remaining
+            </p>
+            <ProgressBar progress={todosProgress} />
           </CardHeader>
         </header>
-
-        <CardContent isOpen={!isOpen}>Tap header to open</CardContent>
 
         <CardContent isOpen={isOpen}>
           <div className="todo-list__actions-container">
