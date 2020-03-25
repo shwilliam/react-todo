@@ -5,7 +5,7 @@ const COLOR_DANGER = '#fa4d56'
 const COLOR_SUCCESS = '#42be65'
 const COLOR_WARN = '#f1c21b'
 
-const ProgressBar = ({progress = 0}) => {
+export const ProgressBar = ({progress = 0}) => {
   const percentage = useMemo(() => Math.round(progress * 100), [progress])
 
   return (
@@ -29,5 +29,3 @@ const ProgressBar = ({progress = 0}) => {
     </div>
   )
 }
-
-export {ProgressBar}

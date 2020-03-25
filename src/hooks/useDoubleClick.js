@@ -1,4 +1,4 @@
-const useDoubleClick = (onClick, onDoubleClick) => {
+export const useDoubleClick = (onClick, onDoubleClick) => {
   let clicks = []
   let timeout
 
@@ -21,5 +21,3 @@ const useDoubleClick = (onClick, onDoubleClick) => {
     }, 250)
   }
 }
-
-export {useDoubleClick}

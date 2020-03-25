@@ -1,7 +1,7 @@
 import React from 'react'
 import {useInput} from '../hooks'
 
-const TextForm = ({onSubmit, placeholder}) => {
+export const TextForm = ({onSubmit, placeholder}) => {
   const {input, handleChange, handleSubmit} = useInput('', onSubmit)
 
   return (
@@ -20,5 +20,3 @@ const TextForm = ({onSubmit, placeholder}) => {
     </form>
   )
 }
-
-export {TextForm}

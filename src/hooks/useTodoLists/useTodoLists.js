@@ -1,18 +1,10 @@
 import {useReducer, useMemo, useCallback} from 'react'
 import {todoListsReducer} from './reducer'
+import {welcomeTodos} from './welcome-todos'
+import {calculateRemainingTodos} from './utils'
 
-const useTodoLists = (initialTodoLists = []) => {
+export const useTodoLists = (initialTodoLists = welcomeTodos) => {
   const [todoLists, dispatch] = useReducer(todoListsReducer, initialTodoLists)
-
-  const totalTodos = useMemo(
-    () =>
-      todoLists.reduce(
-        (total, todoList) =>
-          total + todoList.todos.filter(({done}) => !done).length,
-        0,
-      ),
-    [todoLists],
-  )
 
   const addTodoList = useCallback(
     title => dispatch({type: 'NEW_LIST', title}),
@@ -20,36 +12,40 @@ const useTodoLists = (initialTodoLists = []) => {
   )
 
   const deleteTodoList = useCallback(
-    list => dispatch({type: 'DELETE_LIST', listId: list}),
+    listId => dispatch({type: 'DELETE_LIST', listId}),
     [],
   )
 
   const addTodo = useCallback(
-    (list, label) => dispatch({type: 'NEW_TODO', listId: list, label}),
+    (listId, label) => dispatch({type: 'NEW_TODO', listId, label}),
     [],
   )
 
   const completeTodo = useCallback(
-    (list, todo, done = true) =>
-      dispatch({type: 'COMPLETE_TODO', listId: list, todoId: todo, done}),
+    (listId, todoId, done = true) =>
+      dispatch({type: 'COMPLETE_TODO', listId, todoId, done}),
     [],
   )
 
   const updateTodo = useCallback(
-    (list, todo, label) =>
-      dispatch({type: 'UPDATE_TODO', listId: list, todoId: todo, label}),
+    (listId, todoId, label) =>
+      dispatch({type: 'UPDATE_TODO', listId, todoId, label}),
     [],
   )
 
   const deleteTodo = useCallback(
-    (list, todo) => dispatch({type: 'DELETE_TODO', listId: list, todoId: todo}),
+    (listId, todoId) => dispatch({type: 'DELETE_TODO', listId, todoId}),
     [],
   )
 
   const clearCompleted = useCallback(
-    list => dispatch({type: 'CLEAR_COMPLETE', listId: list}),
+    listId => dispatch({type: 'CLEAR_COMPLETE', listId}),
     [],
   )
+
+  const totalTodos = useMemo(() => calculateRemainingTodos(todoLists), [
+    todoLists,
+  ])
 
   return {
     todoLists,
@@ -63,5 +59,3 @@ const useTodoLists = (initialTodoLists = []) => {
     clearCompleted,
   }
 }
-
-export {useTodoLists}

@@ -1,6 +1,6 @@
 import {useState, useCallback} from 'react'
 
-const useInput = (initialValue = '', onSubmit = () => {}) => {
+export const useInput = (initialValue = '', onSubmit = () => {}) => {
   const [input, setInput] = useState(initialValue)
 
   const handleChange = useCallback(e => setInput(e.target.value), [])
@@ -20,5 +20,3 @@ const useInput = (initialValue = '', onSubmit = () => {}) => {
 
   return {input, handleChange, handleSubmit}
 }
-
-export {useInput}

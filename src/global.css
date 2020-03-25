@@ -102,6 +102,9 @@ ol {
 }
 
 .card__content {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
   pointer-events: auto;
   position: relative;
   background-color: var(--color__ui--light);
@@ -115,6 +118,7 @@ ol {
 }
 
 .card__content--open {
+  display: block;
   margin: 1rem auto;
   height: 80vh;
   width: 80vw;
@@ -182,7 +186,7 @@ ol {
   z-index: 2;
 }
 
-.todo-list {
+.horizontal-scroll-list {
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
@@ -191,18 +195,18 @@ ol {
   height: 100%;
 }
 
-.todo-list__item {
+.horizontal-scroll-list__item {
   flex-shrink: 0;
   scroll-snap-align: center;
   width: 80%;
   margin: 0 5%;
 }
 
-.todo-list__item:first-of-type {
+.horizontal-scroll-list__item:first-of-type {
   padding-left: 7.5%;
 }
 
-.todo-list__item:last-of-type {
+.horizontal-scroll-list__item:last-of-type {
   padding-right: 20%;
 }
 
@@ -235,19 +239,23 @@ ol {
 .todo__label {
   display: inline-block;
   width: 75%;
+  padding: 0 10px 0 20px;
 }
 
 .todo__complete {
-  background-color: transparent;
-  border: none;
-  margin: 0 10px 0 20px;
+  padding: 0 0 0 20px;
 }
 
-.drag-to-confirm__item {
+.h-draggable {
+  background-color: transparent;
+  border: none;
+}
+
+.h-draggable__item {
   background-color: var(--color__ui--light);
 }
 
-.drag-to-confirm__actions {
+.h-draggable__actions {
   position: absolute;
   top: 0;
   left: 0;

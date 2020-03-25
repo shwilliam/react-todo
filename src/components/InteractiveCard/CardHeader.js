@@ -1,6 +1,6 @@
 import React from 'react'
 import {motion, useInvertedScale} from 'framer-motion'
-import {closeSpring, openSpring} from './InteractiveCard/animations'
+import {closeSpring, openSpring} from './animations'
 
 const scaleTranslate = ({x, y, scaleX, scaleY}) =>
   `scaleX(${scaleX}) scaleY(${scaleY}) translate(${x}, ${y}) translateZ(0)`

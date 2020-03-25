@@ -6,7 +6,7 @@ const variants = {
   closed: {opacity: 0, height: '0px', pointerEvents: 'none'},
 }
 
-const CardContent = ({isOpen, children}) => (
+export const CardContent = ({isOpen, children}) => (
   <motion.div
     animate={isOpen ? 'open' : 'closed'}
     variants={variants}
@@ -15,5 +15,3 @@ const CardContent = ({isOpen, children}) => (
     {children}
   </motion.div>
 )
-
-export {CardContent}

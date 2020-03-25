@@ -5,7 +5,7 @@ import {stopEventPropagation} from '../utils'
 const MIN_DRAG_RATIO_FOR_ACTION = 0.75
 const ICON_TRANSITION_DELAY = 300
 
-const HDraggable = ({
+export const HDraggable = ({
   minBounds = -50,
   maxBounds = 50,
   onDragRight,
@@ -54,7 +54,7 @@ const HDraggable = ({
   }, [IconLeft, colorLeft])
 
   return (
-    <motion.div style={{background}} className="drag-to-confirm">
+    <motion.div style={{background}} className="h-draggable">
       <motion.span
         drag="x"
         dragElastic={dragElastic}
@@ -62,18 +62,16 @@ const HDraggable = ({
         onDragEnd={handleDragEnd}
         onClickCapture={handleClickCapture}
         style={{x}}
-        className={`drag-to-confirm__item ${className || ''}`}
+        className={`h-draggable__item ${className || ''}`}
         {...props}
       >
         {children}
       </motion.span>
 
-      <div className="drag-to-confirm__actions">
+      <div className="h-draggable__actions">
         {currentIconLeft}
         <IconRight />
       </div>
     </motion.div>
   )
 }
-
-export {HDraggable}

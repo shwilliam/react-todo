@@ -1,18 +1,13 @@
 import shortid from 'shortid'
+import {findTodoListIdx, findTodoIdx, removeItemFromArray} from './utils'
 
-const todoListsReducer = (
+export const todoListsReducer = (
   todoLists,
   {type, title, label, listId, todoId, done},
 ) => {
   const todoListsCopy = [...todoLists]
-
-  const listIdx =
-    typeof listId !== 'undefined' &&
-    todoListsCopy.findIndex(({id}) => listId === id)
-
-  const todoIdx =
-    typeof todoId !== 'undefined' &&
-    todoListsCopy[listIdx].todos.findIndex(({id}) => todoId === id)
+  const listIdx = findTodoListIdx(listId, todoListsCopy)
+  const todoIdx = findTodoIdx(todoId, listIdx, todoLists)
 
   switch (type) {
     case 'NEW_LIST':
@@ -54,7 +49,7 @@ const todoListsReducer = (
         todoListsCopy[listIdx].todos[todoIdx].done ||
         window.confirm('Are you sure?')
       ) {
-        todoListsCopy[listIdx].todos.splice(todoIdx, 1)
+        removeItemFromArray(todoListsCopy[listIdx].todos, todoIdx)
       }
       return todoListsCopy
 
@@ -62,5 +57,3 @@ const todoListsReducer = (
       return todoLists
   }
 }
-
-export {todoListsReducer}

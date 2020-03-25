@@ -1,7 +1,7 @@
 import React from 'react'
 import {motion} from 'framer-motion'
 
-const Overlay = ({isSelected = false}) => (
+export const Overlay = ({isSelected = false}) => (
   <motion.div
     initial={false}
     animate={{opacity: isSelected ? 1 : 0}}
@@ -10,5 +10,3 @@ const Overlay = ({isSelected = false}) => (
     className="card__overlay"
   />
 )
-
-export {Overlay}

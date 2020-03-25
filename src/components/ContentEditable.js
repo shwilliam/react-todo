@@ -1,7 +1,12 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react'
 import {stopEventPropagation} from '../utils'
 
-const ContentEditable = ({value = '', onEditStart, onEditEnd, onSave}) => {
+export const ContentEditable = ({
+  value = '',
+  onEditStart,
+  onEditEnd,
+  onSave,
+}) => {
   const [inputValue, setInputValue] = useState(value)
   const [isEditing, setIsEditing] = useState(false)
   const inputRef = useRef(null)
@@ -63,5 +68,3 @@ const ContentEditable = ({value = '', onEditStart, onEditEnd, onSave}) => {
     </p>
   )
 }
-
-export {ContentEditable}

@@ -1,11 +1,9 @@
 import React, {useCallback, useMemo, useState} from 'react'
 import {motion} from 'framer-motion'
-import {HDraggable} from './HDraggable'
-import {ContentEditable} from './ContentEditable'
-import {CheckIcon, TrashIcon, CrossIcon} from '../components'
+import {HDraggable, ContentEditable, CheckIcon, TrashIcon, CrossIcon} from './'
 import {useDoubleClick} from '../hooks'
 
-const TodoListItem = ({
+export const TodoListItem = ({
   id,
   listId,
   label,
@@ -85,5 +83,3 @@ const TodoListItem = ({
     </motion.li>
   )
 }
-
-export {TodoListItem}

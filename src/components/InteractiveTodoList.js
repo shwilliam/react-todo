@@ -1,14 +1,19 @@
 import React, {useCallback, useState, useMemo} from 'react'
-import {TextForm} from './TextForm'
-import {TodoList} from './TodoList'
-import {CardHeader} from './CardHeader'
-import {InteractiveCard, CardContent, Overlay} from './InteractiveCard'
-import {ProgressBar} from './ProgressBar'
+import {AnimatePresence} from 'framer-motion'
+import {
+  ProgressBar,
+  TextForm,
+  TodoListItem,
+  InteractiveCard,
+  CardContent,
+  CardHeader,
+  Overlay,
+} from './'
 
 // TODO: abstract throttled toggle to custom hook
 let lastToggle = performance.now()
 
-const TodoListsItem = ({
+export const InteractiveTodoList = ({
   title,
   todos,
   id,
@@ -48,7 +53,7 @@ const TodoListsItem = ({
   }, [todos, todosRemaining])
 
   return (
-    <li className="todo-list__item">
+    <>
       <Overlay isSelected={isOpen} />
 
       <InteractiveCard isOpen={isOpen} onToggle={toggleIsOpen}>
@@ -84,17 +89,22 @@ const TodoListsItem = ({
               </button>
             </div>
           </div>
-          <TodoList
-            data={todos}
-            id={id}
-            onComplete={onTodoComplete}
-            onUpdate={onTodoUpdate}
-            onDelete={onTodoDelete}
-          />
+
+          <ol>
+            {todos.map(d => (
+              <AnimatePresence key={`todo__${id}--${d.id}`}>
+                <TodoListItem
+                  listId={id}
+                  onComplete={onTodoComplete}
+                  onUpdate={onTodoUpdate}
+                  onDelete={onTodoDelete}
+                  {...d}
+                />
+              </AnimatePresence>
+            ))}
+          </ol>
         </CardContent>
       </InteractiveCard>
-    </li>
+    </>
   )
 }
-
-export {TodoListsItem}

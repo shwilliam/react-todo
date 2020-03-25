@@ -1,9 +1,6 @@
 import React from 'react'
 
-const Card = ({children, open, ...props}) => (
-  <div className={`card ${open ? 'card--open' : ''}`} {...props}>
-    {children}
-  </div>
+// TODO: use data attrs for state styling
+export const Card = ({children, open}) => (
+  <div className={`card ${open ? 'card--open' : ''}`}>{children}</div>
 )
-
-export {Card}

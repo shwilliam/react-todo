@@ -1,10 +1,10 @@
 import React, {useCallback, useRef} from 'react'
 import {motion, useMotionValue} from 'framer-motion'
 import {useScrollConstraints} from '../../hooks'
-import {Card} from '../../components'
+import {Card} from '../'
 import {openSpring, closeSpring} from './animations'
 
-const InteractiveCard = ({onToggle, isOpen = false, children}) => {
+export const InteractiveCard = ({onToggle, isOpen = false, children}) => {
   const cardRef = useRef(null)
   const y = useMotionValue(0)
   const zIndex = useMotionValue(isOpen ? 2 : 0)
@@ -43,5 +43,3 @@ const InteractiveCard = ({onToggle, isOpen = false, children}) => {
     </Card>
   )
 }
-
-export {InteractiveCard}
