@@ -4,6 +4,8 @@ export const useScrollConstraints = (ref, measureConstraints) => {
   const [constraints, setConstraints] = useState({
     top: 0,
     bottom: 0,
+    left: 0,
+    right: 0,
   })
 
   useEffect(() => {
@@ -16,7 +18,7 @@ export const useScrollConstraints = (ref, measureConstraints) => {
     const scrollableViewport = viewportHeight - contentTop * 2
     const top = Math.min(scrollableViewport - contentHeight, 0)
 
-    setConstraints({top, bottom: 0})
+    setConstraints(s => ({...s, top}))
   }, [measureConstraints, ref])
 
   return constraints

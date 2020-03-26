@@ -7,13 +7,15 @@ import {openSpring, closeSpring} from './animations'
 export const InteractiveCard = ({onToggle, isOpen = false, children}) => {
   const cardRef = useRef(null)
   const y = useMotionValue(0)
+  const x = useMotionValue(0)
   const zIndex = useMotionValue(isOpen ? 2 : 0)
   const scrollConstraints = useScrollConstraints(cardRef, isOpen)
 
   const checkSwipeToToggle = useCallback(() => {
     const yOffset = Math.abs(y.get())
-    if (yOffset > (isOpen ? 100 : 40)) onToggle()
-  }, [onToggle, y, isOpen])
+    const xOffset = Math.abs(x.get())
+    if (yOffset > 100 || xOffset > 75) onToggle()
+  }, [onToggle, x, y])
 
   const checkZIndex = useCallback(
     latest => {
@@ -31,9 +33,9 @@ export const InteractiveCard = ({onToggle, isOpen = false, children}) => {
       <motion.div
         ref={cardRef}
         className={`card__content ${isOpen ? 'card__content--open' : ''}`}
-        style={{zIndex, y}}
+        style={{zIndex, y, x}}
         layoutTransition={isOpen ? openSpring : closeSpring}
-        drag={isOpen ? 'y' : false}
+        drag={isOpen ? true : false}
         dragConstraints={scrollConstraints}
         onDrag={checkSwipeToToggle}
         onUpdate={checkZIndex}
