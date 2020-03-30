@@ -1,16 +1,16 @@
 import React from 'react'
 import {
-  HorizontalScrollList,
-  HorizontalScrollListItem,
+  VerticalScrollList,
+  VerticalScrollListItem,
   InteractiveTodoList,
 } from './'
 
 export const TodoListSelector = ({data, ...props}) => (
-  <HorizontalScrollList>
+  <VerticalScrollList>
     {data.map(d => (
-      <HorizontalScrollListItem key={`todo__${d.id}`}>
+      <VerticalScrollListItem key={`todo__${d.id}`}>
         <InteractiveTodoList {...props} {...d} />
-      </HorizontalScrollListItem>
+      </VerticalScrollListItem>
     ))}
-  </HorizontalScrollList>
+  </VerticalScrollList>
 )

@@ -60,10 +60,16 @@ export const InteractiveTodoList = ({
         <header className="todo-list__header">
           <CardHeader isSelected={isOpen} onClick={toggleIsOpen}>
             <h2 className="todo-list__title">{title}</h2>
-            <p className="todo-list__subtitle">
-              {todosRemaining} tasks remaining
-            </p>
-            <ProgressBar progress={todosProgress} />
+            {todosRemaining > 0 ? (
+              <p className="todo-list__subtitle">
+                {todosRemaining} task{todosRemaining > 1 ? 's' : ''} remaining
+              </p>
+            ) : todos.length > 0 ? (
+              <p className="todo-list__subtitle">No tasks remaining</p>
+            ) : (
+              <p className="todo-list__subtitle">Empty list</p>
+            )}
+            {todosRemaining > 0 && <ProgressBar progress={todosProgress} />}
           </CardHeader>
         </header>
 

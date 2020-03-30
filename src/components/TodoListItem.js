@@ -48,6 +48,7 @@ export const TodoListItem = ({
       initial={{opacity: 0, scaleY: 0}}
       animate={{opacity: 1, scaleY: 1}}
       exit={{opacity: 0, scaleY: 0}}
+      positionTransition
     >
       <HDraggable
         className="todo"

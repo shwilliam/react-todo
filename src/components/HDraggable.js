@@ -3,7 +3,7 @@ import {motion, useMotionValue, useTransform} from 'framer-motion'
 import {stopEventPropagation} from '../utils'
 
 const MIN_DRAG_RATIO_FOR_ACTION = 0.75
-const ICON_TRANSITION_DELAY = 300
+const ICON_TRANSITION_DELAY = 400
 
 export const HDraggable = ({
   minBounds = -50,
