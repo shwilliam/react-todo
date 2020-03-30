@@ -37,15 +37,12 @@
   margin: 0 auto;
 }
 
-.contentOpen {
+.content[data-state='OPEN'] {
   display: block;
   margin: 1rem auto;
   height: 80vh;
   min-height: 300px;
   width: 80vw;
+  max-width: 500px;
   overflow-y: scroll;
-  pointer-events: auto;
-  position: relative;
-  background-color: var(--color__ui--light);
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.1);
 }

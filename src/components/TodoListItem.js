@@ -72,7 +72,11 @@ export const TodoListItem = ({
           <span className={styles.icon}>{done ? '◉' : '◎'}</span>
         </label>
 
-        <h3 className={styles.label} data-done={done} onClick={handleClick}>
+        <h3
+          className={styles.label}
+          data-state={done ? 'DONE' : 'TODO'}
+          onClick={handleClick}
+        >
           <ContentEditable
             value={label}
             onEditStart={handleEditStart}

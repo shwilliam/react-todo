@@ -33,7 +33,8 @@ export const InteractiveCard = ({onToggle, isOpen = false, children}) => {
     <Card open={isOpen}>
       <motion.div
         ref={cardRef}
-        className={isOpen ? styles.contentOpen : styles.content}
+        className={styles.content}
+        data-state={isOpen ? 'OPEN' : 'CLOSED'}
         style={{zIndex, y, x}}
         layoutTransition={isOpen ? openSpring : closeSpring}
         drag={isOpen ? true : false}

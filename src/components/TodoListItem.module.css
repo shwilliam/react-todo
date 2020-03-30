@@ -8,7 +8,7 @@
   padding: 0 10px 0 20px;
 }
 
-.label[data-done='true'] {
+.label[data-state='DONE'] {
   text-decoration: line-through;
 }
 
