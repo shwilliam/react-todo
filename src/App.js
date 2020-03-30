@@ -1,6 +1,7 @@
 import React from 'react'
 import {TodoListSelector, TextForm} from './components'
 import {useTodoLists} from './hooks'
+import styles from './App.module.css'
 
 const App = () => {
   const {
@@ -16,17 +17,17 @@ const App = () => {
   } = useTodoLists()
 
   return (
-    <div className="site__container">
-      <header className="site__header">
-        <h1 className="site__title">React Todo</h1>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1 className={styles.title}>React Todo</h1>
         <p>You have {totalTodos} tasks</p>
 
-        <div className="site__header-actions">
+        <div className={styles.actions}>
           <TextForm onSubmit={addTodoList} placeholder="Add a list..." />
         </div>
       </header>
 
-      <main className="site__main">
+      <main className={styles.main}>
         <TodoListSelector
           data={todoLists}
           onListDelete={deleteTodoList}

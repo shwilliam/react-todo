@@ -1,5 +1,6 @@
 # React Todo
 
 - Logic abstracted into custom hooks
-- BEM-style CSS
+- Styled using CSS-modules
+- State-based styling with data attribute selectors
 - [...]

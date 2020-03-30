@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.progress {
+  flex-grow: 1;
+  position: relative;
+  height: 12.5px;
+  overflow: hidden;
+  background-color: var(--color__ui--default);
+}
+
+.bar {
+  transform-origin: left;
+  height: 12.5px;
+}
+
+.text {
+  font-size: 0.75rem;
+  opacity: 0.65;
+  padding: 0 0 0 0.5rem;
+}

@@ -1,20 +1,21 @@
 import React from 'react'
 import {useInput} from '../hooks'
+import styles from './TextForm.module.css'
 
 export const TextForm = ({onSubmit, placeholder}) => {
   const {input, handleChange, handleSubmit} = useInput('', onSubmit)
 
   return (
-    <form className="text-form" onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <input
         type="text"
-        className="input text-form__input"
+        className={styles.input}
         value={input}
         onChange={handleChange}
         placeholder={placeholder}
       />
 
-      <button className="button" type="submit">
+      <button className={styles.button} type="submit">
         add
       </button>
     </form>

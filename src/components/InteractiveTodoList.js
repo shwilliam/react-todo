@@ -9,6 +9,7 @@ import {
   CardHeader,
   Overlay,
 } from './'
+import styles from './InteractiveTodoList.module.css'
 
 // TODO: abstract throttled toggle to custom hook
 let lastToggle = performance.now()
@@ -57,29 +58,29 @@ export const InteractiveTodoList = ({
       <Overlay isSelected={isOpen} />
 
       <InteractiveCard isOpen={isOpen} onToggle={toggleIsOpen}>
-        <header className="todo-list__header">
+        <header className={styles.header}>
           <CardHeader isSelected={isOpen} onClick={toggleIsOpen}>
-            <h2 className="todo-list__title">{title}</h2>
+            <h2 className={styles.title}>{title}</h2>
             {todosRemaining > 0 ? (
-              <p className="todo-list__subtitle">
+              <p className={styles.subtitle}>
                 {todosRemaining} task{todosRemaining > 1 ? 's' : ''} remaining
               </p>
             ) : todos.length > 0 ? (
-              <p className="todo-list__subtitle">No tasks remaining</p>
+              <p className={styles.subtitle}>No tasks remaining</p>
             ) : (
-              <p className="todo-list__subtitle">Empty list</p>
+              <p className={styles.subtitle}>Empty list</p>
             )}
             {todosRemaining > 0 && <ProgressBar progress={todosProgress} />}
           </CardHeader>
         </header>
 
         <CardContent isOpen={isOpen}>
-          <div className="todo-list__actions-container">
+          <div className={styles.actions}>
             <TextForm onSubmit={handleTodoAdd} placeholder="Add a task..." />
 
-            <div className="todo-list__action">
+            <div>
               <button
-                className="button todo-list__action"
+                className={styles.action}
                 onClick={handleClearCompleted}
                 type="button"
               >
@@ -87,7 +88,7 @@ export const InteractiveTodoList = ({
               </button>
 
               <button
-                className="button todo-list__action"
+                className={styles.action}
                 onClick={handleTodoDelete}
                 type="button"
               >

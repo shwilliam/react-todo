@@ -1,5 +1,6 @@
 import React from 'react'
+import styles from './VerticalScrollList.module.css'
 
 export const VerticalScrollListItem = ({children}) => (
-  <li className="vertical-scroll-list__item">{children}</li>
+  <li className={styles.item}>{children}</li>
 )

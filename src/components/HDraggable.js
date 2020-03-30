@@ -1,6 +1,7 @@
 import React, {useCallback, useState, useEffect, useMemo} from 'react'
 import {motion, useMotionValue, useTransform} from 'framer-motion'
 import {stopEventPropagation} from '../utils'
+import styles from './HDraggable.module.css'
 
 const MIN_DRAG_RATIO_FOR_ACTION = 0.75
 const ICON_TRANSITION_DELAY = 400
@@ -54,7 +55,7 @@ export const HDraggable = ({
   }, [IconLeft, colorLeft])
 
   return (
-    <motion.div style={{background}} className="h-draggable">
+    <motion.div style={{background}} className={styles.container}>
       <motion.span
         drag="x"
         dragElastic={dragElastic}
@@ -62,13 +63,13 @@ export const HDraggable = ({
         onDragEnd={handleDragEnd}
         onClickCapture={handleClickCapture}
         style={{x}}
-        className={`h-draggable__item ${className || ''}`}
+        className={styles.item}
         {...props}
       >
         {children}
       </motion.span>
 
-      <div className="h-draggable__actions">
+      <div className={styles.actions}>
         {currentIconLeft}
         <IconRight />
       </div>

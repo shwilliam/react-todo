@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react'
 import {motion} from 'framer-motion'
+import styles from './ProgressBar.module.css'
 
 const COLOR_DANGER = '#fa4d56'
 const COLOR_SUCCESS = '#42be65'
@@ -9,10 +10,10 @@ export const ProgressBar = ({progress = 0}) => {
   const percentage = useMemo(() => Math.round(progress * 100), [progress])
 
   return (
-    <div className="progress">
-      <div className="progress-bar__container">
+    <div className={styles.container}>
+      <div className={styles.progress}>
         <motion.div
-          className="progress-bar"
+          className={styles.bar}
           animate={{
             scaleX: progress,
             backgroundColor:
@@ -25,7 +26,7 @@ export const ProgressBar = ({progress = 0}) => {
         />
       </div>
 
-      <p className="progress__text">{percentage}%</p>
+      <p className={styles.text}>{percentage}%</p>
     </div>
   )
 }

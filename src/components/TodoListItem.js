@@ -2,6 +2,7 @@ import React, {useCallback, useMemo, useState} from 'react'
 import {motion} from 'framer-motion'
 import {HDraggable, ContentEditable, CheckIcon, TrashIcon, CrossIcon} from './'
 import {useDoubleClick} from '../hooks'
+import styles from './TodoListItem.module.css'
 
 export const TodoListItem = ({
   id,
@@ -44,14 +45,13 @@ export const TodoListItem = ({
 
   return (
     <motion.li
-      className="todo__container"
+      className={styles.container}
       initial={{opacity: 0, scaleY: 0}}
       animate={{opacity: 1, scaleY: 1}}
       exit={{opacity: 0, scaleY: 0}}
       positionTransition
     >
       <HDraggable
-        className="todo"
         disabled={isEditing}
         onDragRight={handleComplete}
         onDragLeft={handleDelete}
@@ -63,16 +63,16 @@ export const TodoListItem = ({
         <input
           type="checkbox"
           id={`todo__complete--${id}`}
-          className="sr-only checkbox"
+          className={styles.checkbox}
           checked={done}
           onChange={handleComplete}
         />
-        <label htmlFor={`todo__complete--${id}`} className="label">
+        <label htmlFor={`todo__complete--${id}`}>
           <span className="sr-only">Mark as {done ? 'to do' : 'done'}</span>
-          <span className="label__icon todo__complete">{done ? '◉' : '◎'}</span>
+          <span className={styles.icon}>{done ? '◉' : '◎'}</span>
         </label>
 
-        <h3 className="todo__label" data-done={done} onClick={handleClick}>
+        <h3 className={styles.label} data-done={done} onClick={handleClick}>
           <ContentEditable
             value={label}
             onEditStart={handleEditStart}

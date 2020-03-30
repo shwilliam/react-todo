@@ -3,6 +3,7 @@ import {motion, useMotionValue} from 'framer-motion'
 import {useScrollConstraints} from '../../hooks'
 import {Card} from '../'
 import {openSpring, closeSpring} from './animations'
+import styles from './InteractiveCard.module.css'
 
 export const InteractiveCard = ({onToggle, isOpen = false, children}) => {
   const cardRef = useRef(null)
@@ -32,7 +33,7 @@ export const InteractiveCard = ({onToggle, isOpen = false, children}) => {
     <Card open={isOpen}>
       <motion.div
         ref={cardRef}
-        className={`card__content ${isOpen ? 'card__content--open' : ''}`}
+        className={isOpen ? styles.contentOpen : styles.content}
         style={{zIndex, y, x}}
         layoutTransition={isOpen ? openSpring : closeSpring}
         drag={isOpen ? true : false}

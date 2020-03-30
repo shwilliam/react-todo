@@ -1,0 +1,18 @@
+.editable {
+  cursor: text;
+}
+
+.input {
+  font: inherit;
+  cursor: text;
+  width: 100%;
+  display: block;
+  border: 1px solid #222;
+  background-color: #fff;
+  padding: 0 5px;
+}
+
+.input::placeholder {
+  color: #222;
+  opacity: 1;
+}

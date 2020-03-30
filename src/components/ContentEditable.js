@@ -1,5 +1,6 @@
 import React, {useState, useRef, useEffect, useCallback} from 'react'
 import {stopEventPropagation} from '../utils'
+import styles from './ContentEditable.module.css'
 
 export const ContentEditable = ({
   value = '',
@@ -52,7 +53,7 @@ export const ContentEditable = ({
     return (
       <input
         type="text"
-        className="content-editable content-editable--input"
+        className={styles.input}
         ref={inputRef}
         onClick={stopEventPropagation}
         onKeyDown={handleKeyDown}
@@ -63,7 +64,7 @@ export const ContentEditable = ({
     )
 
   return (
-    <p className="content-editable" onDoubleClick={handleDoubleClick}>
+    <p className={styles.editable} onDoubleClick={handleDoubleClick}>
       {inputValue || value}
     </p>
   )
