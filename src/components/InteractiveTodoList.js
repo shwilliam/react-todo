@@ -1,4 +1,5 @@
 import React, {useCallback, useState, useMemo} from 'react'
+import {Scroll} from 'framer'
 import {AnimatePresence} from 'framer-motion'
 import {
   ProgressBar,
@@ -70,7 +71,9 @@ export const InteractiveTodoList = ({
             ) : (
               <p className={styles.subtitle}>Empty list</p>
             )}
-            {todosRemaining > 0 && <ProgressBar progress={todosProgress} />}
+            <div className={styles.progress}>
+              {todos.length > 0 && <ProgressBar progress={todosProgress} />}
+            </div>
           </CardHeader>
         </header>
 
@@ -96,20 +99,21 @@ export const InteractiveTodoList = ({
               </button>
             </div>
           </div>
-
-          <ol>
-            {todos.map(d => (
-              <AnimatePresence key={`todo__${id}--${d.id}`}>
-                <TodoListItem
-                  listId={id}
-                  onComplete={onTodoComplete}
-                  onUpdate={onTodoUpdate}
-                  onDelete={onTodoDelete}
-                  {...d}
-                />
-              </AnimatePresence>
-            ))}
-          </ol>
+          {todos.length ? (
+            <Scroll style={{width: '100%', height: '50vh'}}>
+              {todos.map(d => (
+                <AnimatePresence key={`todo__${id}--${d.id}`}>
+                  <TodoListItem
+                    listId={id}
+                    onComplete={onTodoComplete}
+                    onUpdate={onTodoUpdate}
+                    onDelete={onTodoDelete}
+                    {...d}
+                  />
+                </AnimatePresence>
+              ))}
+            </Scroll>
+          ) : null}
         </CardContent>
       </InteractiveCard>
     </>

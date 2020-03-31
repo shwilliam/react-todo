@@ -1,20 +1,45 @@
 .list {
-  display: grid;
-  grid-template-rows: auto;
-  grid-template-columns: 1fr;
   padding: 20px 10%;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
+  overflow-x: scroll;
+  white-space: nowrap;
+  scroll-snap-type: x mandatory;
+  height: 100%;
 }
 
 .item {
+  display: inline-block;
+  width: 80%;
   margin: 0 5% 20px 5%;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
+}
+
+.item:first-of-type {
+  margin-left: 10%;
+}
+
+.item:last-of-type {
+  margin-right: 20%;
 }
 
 @media only screen and (min-width: 560px) {
+  .list {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr;
+    scroll-snap-type: y mandatory;
+  }
+
   .item {
     width: 500px;
     margin: 0 auto 30px auto;
+  }
+
+  .item:first-of-type {
+    margin-left: auto;
+  }
+
+  .item:last-of-type {
+    margin-right: auto;
+    padding-bottom: 200px;
   }
 }

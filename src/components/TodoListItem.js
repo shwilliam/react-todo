@@ -44,12 +44,13 @@ export const TodoListItem = ({
   const handleEditEnd = useCallback(() => setIsEditing(false), [])
 
   return (
-    <motion.li
+    <motion.div
       className={styles.container}
       initial={{opacity: 0, scaleY: 0}}
       animate={{opacity: 1, scaleY: 1}}
       exit={{opacity: 0, scaleY: 0}}
       positionTransition
+      style={{width: '80vw', maxWidth: '500px'}}
     >
       <HDraggable
         disabled={isEditing}
@@ -85,6 +86,6 @@ export const TodoListItem = ({
           />
         </h3>
       </HDraggable>
-    </motion.li>
+    </motion.div>
   )
 }

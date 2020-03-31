@@ -18,16 +18,13 @@ export const InteractiveCard = ({onToggle, isOpen = false, children}) => {
     if (yOffset > 100 || xOffset > 75) onToggle()
   }, [onToggle, x, y])
 
-  const checkZIndex = useCallback(
-    latest => {
-      if (isOpen) {
-        zIndex.set(2)
-      } else if (!isOpen && latest.scaleX < 1.01) {
-        zIndex.set(0)
-      }
-    },
-    [isOpen, zIndex],
-  )
+  const checkZIndex = useCallback(() => {
+    if (isOpen) {
+      zIndex.set(2)
+    } else {
+      zIndex.set(0)
+    }
+  }, [isOpen, zIndex])
 
   return (
     <Card open={isOpen}>

@@ -1,4 +1,5 @@
 .title {
+  height: 3rem;
   font-size: 1.25rem;
   padding: 10px 0 10px 0;
   margin: 20px 20px 0 20px;
@@ -11,9 +12,6 @@
 .header {
   background-color: var(--color__ui--light);
   padding-bottom: 12.5px;
-  position: sticky;
-  top: 0;
-  z-index: 2;
 }
 
 .actions {
@@ -27,6 +25,10 @@
   margin: 5px 0;
   border: 1px solid #222;
   background-color: #fff;
+}
+
+.progress {
+  height: 1rem;
 }
 
 .action:not(:first-of-type) {

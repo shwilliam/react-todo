@@ -9,7 +9,7 @@
 .card[data-state='OPEN'] {
   display: block;
   position: fixed;
-  top: 5%;
+  top: 5vh;
   left: 0;
   right: 0;
   z-index: 1;
