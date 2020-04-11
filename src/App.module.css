@@ -23,8 +23,22 @@
   margin: 20px auto 10px auto;
 }
 
-.actions {
-  margin-top: 1rem;
+.new {
+  cursor: pointer;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  background-color: var(--color__ui--brand);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 10px 10px 0 rgba(0, 0, 0, 0.1);
+  border: none;
+  padding: 0.5rem;
+  z-index: 999;
+}
+
+.new svg {
+  stroke: var(--color__ui--light);
 }
 
 .main {

@@ -7,9 +7,9 @@ import styles from './InteractiveCard.module.css'
 const scaleTranslate = ({x, y, scaleX, scaleY}) =>
   `scaleX(${scaleX}) scaleY(${scaleY}) translate(${x}, ${y}) translateZ(0)`
 
-export const CardHeader = ({isSelected, children, ...props}) => {
+export const CardHeader = ({state, children, ...props}) => {
   const inverted = useInvertedScale()
-  const x = isSelected ? 0 : 1
+  const x = state === 'OPEN' ? 0 : 1
   const y = x
 
   return (
@@ -17,14 +17,15 @@ export const CardHeader = ({isSelected, children, ...props}) => {
       className={styles.header}
       initial={false}
       animate={{x, y}}
-      transition={isSelected ? openSpring : closeSpring}
+      transition={state === 'OPEN' ? openSpring : closeSpring}
       transformTemplate={scaleTranslate}
       style={{...inverted, originX: 0, originY: 0}}
       {...props}
     >
       {children}
       <div className={styles.headerAction}>
-        {isSelected ? <MinusIcon /> : <PlusIcon />}
+        {state === 'OPEN' && <MinusIcon />}
+        {state === 'CLOSED' && <PlusIcon />}
       </div>
     </motion.header>
   )

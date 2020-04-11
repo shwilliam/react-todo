@@ -7,12 +7,17 @@ export const useTodoLists = (initialTodoLists = welcomeTodos) => {
   const [todoLists, dispatch] = useReducer(todoListsReducer, initialTodoLists)
 
   const addTodoList = useCallback(
-    title => dispatch({type: 'NEW_LIST', title}),
+    (title = '') => dispatch({type: 'NEW_LIST', title}),
     [],
   )
 
   const deleteTodoList = useCallback(
     listId => dispatch({type: 'DELETE_LIST', listId}),
+    [],
+  )
+
+  const renameTodoList = useCallback(
+    (id, title) => dispatch({type: 'RENAME_LIST', title, listId: id}),
     [],
   )
 
@@ -52,6 +57,7 @@ export const useTodoLists = (initialTodoLists = welcomeTodos) => {
     totalTodos,
     addTodoList,
     deleteTodoList,
+    renameTodoList,
     addTodo,
     completeTodo,
     updateTodo,

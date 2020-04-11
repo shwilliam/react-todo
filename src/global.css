@@ -1,7 +1,8 @@
 :root {
-  --color__bg: papayawhip;
+  --color__bg: #c9deff;
   --color__ui--default: #f4f4f4;
   --color__ui--light: #fff;
+  --color__ui--brand: #2074b2;
   --color__accent--danger: #fa4d56;
   --color__accent--success: #42be65;
   --color__accent--warn: #f1c21b;

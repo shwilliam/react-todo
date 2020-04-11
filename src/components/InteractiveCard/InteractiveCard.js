@@ -5,7 +5,12 @@ import {Card} from '../'
 import {openSpring, closeSpring} from './animations'
 import styles from './InteractiveCard.module.css'
 
-export const InteractiveCard = ({onToggle, isOpen = false, children}) => {
+export const InteractiveCard = ({
+  onToggle,
+  isOpen = false,
+  state,
+  children,
+}) => {
   const cardRef = useRef(null)
   const y = useMotionValue(0)
   const x = useMotionValue(0)
@@ -31,7 +36,7 @@ export const InteractiveCard = ({onToggle, isOpen = false, children}) => {
       <motion.div
         ref={cardRef}
         className={styles.content}
-        data-state={isOpen ? 'OPEN' : 'CLOSED'}
+        data-state={state}
         style={{zIndex, y, x}}
         layoutTransition={isOpen ? openSpring : closeSpring}
         drag={isOpen ? true : false}

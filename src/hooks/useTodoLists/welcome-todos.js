@@ -2,6 +2,7 @@ import shortid from 'shortid'
 
 export const welcomeTodos = [
   {
+    _demo: true,
     id: shortid.generate(),
     title: 'Welcome 👋',
     todos: [

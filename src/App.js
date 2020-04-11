@@ -1,5 +1,5 @@
 import React from 'react'
-import {TodoListSelector, TextForm} from './components'
+import {TodoListSelector, PlusIcon} from './components'
 import {useTodoLists} from './hooks'
 import styles from './App.module.css'
 
@@ -9,6 +9,7 @@ const App = () => {
     totalTodos,
     addTodoList,
     deleteTodoList,
+    renameTodoList,
     addTodo,
     completeTodo,
     updateTodo,
@@ -22,9 +23,10 @@ const App = () => {
         <h1 className={styles.title}>React Todo</h1>
         <p>You have {totalTodos} tasks</p>
 
-        <div className={styles.actions}>
-          <TextForm onSubmit={addTodoList} placeholder="Add a list..." />
-        </div>
+        <button className={styles.new} onClick={addTodoList}>
+          <span className="sr-only">Add a list</span>
+          <PlusIcon />
+        </button>
       </header>
 
       <main className={styles.main}>
@@ -36,6 +38,7 @@ const App = () => {
           onTodoUpdate={updateTodo}
           onTodoDelete={deleteTodo}
           onClearCompleted={clearCompleted}
+          onTodoListRename={renameTodoList}
         />
       </main>
     </div>

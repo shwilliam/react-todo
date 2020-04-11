@@ -37,10 +37,20 @@
   margin: 0 auto;
 }
 
+.content[data-state='CREATE'],
 .content[data-state='OPEN'] {
   display: block;
   margin: 1rem auto;
-  height: calc(50vh + 220px);
   width: 80vw;
   max-width: 500px;
+}
+
+.content[data-state='CREATE'] {
+  height: 100px;
+  position: relative;
+  top: 50%;
+}
+
+.content[data-state='OPEN'] {
+  height: calc(50vh + 220px);
 }

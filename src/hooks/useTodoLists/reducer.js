@@ -16,6 +16,10 @@ export const todoListsReducer = (
     case 'DELETE_LIST':
       return todoListsCopy.filter(({id}) => id !== listId)
 
+    case 'RENAME_LIST':
+      todoListsCopy[listIdx].title = title
+      return todoListsCopy
+
     case 'CLEAR_COMPLETE':
       todoListsCopy[listIdx].todos = todoListsCopy[listIdx].todos.filter(
         ({done}) => !done,

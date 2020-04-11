@@ -1,4 +1,4 @@
-import React, {useCallback, useState, useMemo} from 'react'
+import React, {useCallback, useState, useMemo, useEffect, useRef} from 'react'
 import {Scroll} from 'framer'
 import {AnimatePresence} from 'framer-motion'
 import {
@@ -25,13 +25,17 @@ export const InteractiveTodoList = ({
   onTodoUpdate,
   onTodoDelete,
   onClearCompleted,
+  onTodoListRename,
+  _demo,
 }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [state, setState] = useState(_demo ? 'CLOSED' : 'CREATE')
+  const titleRef = useRef()
+
   const toggleIsOpen = useCallback(() => {
     // throttle toggle
     const now = performance.now()
     if (now - lastToggle > 400) {
-      setIsOpen(s => !s)
+      setState(s => (['CREATE', 'OPEN'].includes(s) ? 'CLOSED' : 'OPEN'))
       lastToggle = now
     }
   }, [])
@@ -47,6 +51,16 @@ export const InteractiveTodoList = ({
     onListDelete,
     id,
   ])
+  const handleNameChange = useCallback(
+    e => {
+      onTodoListRename(id, e.target.innerText || 'Untitled')
+      setState('OPEN')
+    },
+    [onTodoListRename, id],
+  )
+  const handleNameKeyDown = e => {
+    if (e.key === 'Enter') handleNameChange(e)
+  }
   const todosRemaining = todos.filter(({done}) => !done).length
   const todosProgress = useMemo(() => {
     if (!todos || !todos.length) return 0
@@ -54,14 +68,32 @@ export const InteractiveTodoList = ({
     return (totalTodos - todosRemaining) / totalTodos
   }, [todos, todosRemaining])
 
+  useEffect(() => {
+    if (title !== '') {
+      titleRef.current.focus()
+    }
+  }, [title])
+
   return (
     <>
-      <Overlay isSelected={isOpen} />
+      <Overlay isSelected={['CREATE', 'OPEN'].includes(state)} />
 
-      <InteractiveCard isOpen={isOpen} onToggle={toggleIsOpen}>
+      <InteractiveCard
+        isOpen={['CREATE', 'OPEN'].includes(state)}
+        state={state}
+        onToggle={toggleIsOpen}
+      >
         <header className={styles.header}>
-          <CardHeader isSelected={isOpen} onClick={toggleIsOpen}>
-            <h2 className={styles.title}>{title}</h2>
+          <CardHeader state={state} onClick={toggleIsOpen}>
+            <h2
+              className={styles.title}
+              ref={titleRef}
+              contentEditable={state === 'CREATE'}
+              onBlur={handleNameChange}
+              onKeyDown={handleNameKeyDown}
+            >
+              {(state !== 'CREATE' || _demo) && title}
+            </h2>
             {todosRemaining > 0 ? (
               <p className={styles.subtitle}>
                 {todosRemaining} task{todosRemaining > 1 ? 's' : ''} remaining
@@ -77,27 +109,25 @@ export const InteractiveTodoList = ({
           </CardHeader>
         </header>
 
-        <CardContent isOpen={isOpen}>
+        <CardContent isOpen={state === 'OPEN'}>
           <div className={styles.actions}>
             <TextForm onSubmit={handleTodoAdd} placeholder="Add a task..." />
 
-            <div>
-              <button
-                className={styles.action}
-                onClick={handleClearCompleted}
-                type="button"
-              >
-                clear completed
-              </button>
+            <button
+              className={styles.action}
+              onClick={handleClearCompleted}
+              type="button"
+            >
+              clear completed
+            </button>
 
-              <button
-                className={styles.action}
-                onClick={handleTodoDelete}
-                type="button"
-              >
-                delete list
-              </button>
-            </div>
+            <button
+              className={styles.action}
+              onClick={handleTodoDelete}
+              type="button"
+            >
+              delete list
+            </button>
           </div>
           {todos.length ? (
             <Scroll style={{width: '100%', height: '50vh'}}>
