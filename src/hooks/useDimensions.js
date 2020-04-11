@@ -41,7 +41,7 @@ export const useDimensions = ({liveMeasure = true} = {}) => {
         }
       }
     }
-  }, [node])
+  }, [node, liveMeasure])
 
   return [ref, dimensions, node]
 }
